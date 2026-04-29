@@ -1,0 +1,137 @@
+.booking-page {
+  min-height: 100vh;
+  padding-top: 100px;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+.booking-header {
+  text-align: center;
+  padding: 2rem;
+}
+
+.booking-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.booking-form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 20px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: #D4AF37;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group select,
+.date-picker {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.date-picker:focus {
+  outline: none;
+  border-color: #D4AF37;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.message {
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.message.success {
+  background: rgba(76, 175, 80, 0.2);
+  border: 1px solid #4caf50;
+  color: #4caf50;
+}
+
+.message.error {
+  background: rgba(244, 67, 54, 0.2);
+  border: 1px solid #f44336;
+  color: #f44336;
+}
+.time-slots {
+  margin-top: 0.5rem;
+}
+
+.time-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.time-slot-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.time-slot-btn:hover {
+  background: rgba(212, 175, 55, 0.3);
+  border-color: #D4AF37;
+}
+
+.time-slot-btn.selected {
+  background: #D4AF37;
+  color: #000;
+  border-color: #D4AF37;
+  font-weight: bold;
+}
+.form-group{
+  color: black;
+}
+
+.cancel {
+  list-style: none;
+}
+
+.cancel-link {
+  color: #ffaa33 !important;
+}
+
+.cancel-link:hover {
+  color: #ff0000 !important;
+  transform: translateX(5px);
+}
+
+.cancel-link::before {
+  content: '✕ ';
+  font-size: 0.9rem;
+}

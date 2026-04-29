@@ -1,0 +1,71 @@
+.about-page {
+  min-height: 100vh;
+  padding-top: 80px;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+.about-hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+}
+
+.about-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.about-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+  border-color: #D4AF37;
+}
+
+.about-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.about-card h3 {
+  color: #D4AF37;
+  margin-bottom: 1rem;
+}
+
+.about-story {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+  border-top: 2px solid rgba(212, 175, 55, 0.3);
+  border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+}
+
+.about-story h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.about-story p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+  color: #ddd;
+}
