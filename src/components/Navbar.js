@@ -19,8 +19,8 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-logo">
+        <span className="logo-text">STYLEBY</span>
           <span className="logo-gold">MK</span>
-          <span className="logo-text">STYLE</span>
         </Link>
 
         <div className={`nav-menu ${isOpen ? "active" : ""}`}>
