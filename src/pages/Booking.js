@@ -47,7 +47,6 @@ const Booking = () => {
         const response = await axios.get(
           `http://localhost:5000/api/bookings/slots/${dateStr}`,
         );
-        // response.data.availableTimes now contains only non‑overlapping start times
         setAvailableTimes(response.data.availableTimes || []);
         if (
           formData.time &&
@@ -56,12 +55,14 @@ const Booking = () => {
           setFormData((prev) => ({ ...prev, time: "" }));
         }
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching slots:", error);
+        setAvailableTimes([]);
       } finally {
         setFetchingSlots(false);
       }
     };
     fetchBookedSlots();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.date]);
 
   const handleChange = (e) => {
@@ -212,7 +213,7 @@ const Booking = () => {
             type="submit"
             disabled={loading || !formData.time || fetchingSlots}
           >
-            {loading ? "Processing..." : "Confirm Booking ✨"}
+            {loading ? "Processing..." : "Confirm Booking "}
           </GoldButton>
           <li className="cancel">
             <Link to="/cancel" className="cancel-link">

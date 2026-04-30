@@ -1,13 +1,14 @@
 import React from 'react';
 import GoldButton from '../components/GoldButton';
 import './Home.css';
+import Video from '../assets/video/video.mp4';
 
 const Home = () => {
   return (
     <div className="home-container">
       <div className="video-background">
         <video autoPlay loop muted playsInline>
-          <source src="https://assets.mixkit.co/videos/premium/mixkit-hairdresser-cutting-hair-32157-large.mp4" type="video/mp4" />
+          <source src={Video} type="video/mp4" />
         </video>
         <div className="video-overlay"></div>
       </div>

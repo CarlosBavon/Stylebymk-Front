@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
+import myLogo from './logo.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +20,10 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-logo">
-        <span className="logo-text">STYLEBY</span>
+          <div className="profile-container">
+            <img src={myLogo} alt="Profile Logo" className="profile-img" />
+          </div>
+          <span className="logo-text">STYLEBY</span>
           <span className="logo-gold">MK</span>
         </Link>
 

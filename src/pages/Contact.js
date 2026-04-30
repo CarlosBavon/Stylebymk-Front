@@ -42,10 +42,10 @@ const Contact = () => {
       <div className="contact-wrapper">
         <div className="contact-info">
           <h3>Contact Information</h3>
-          <div className="info-item">📍 123 Style Avenue, NYC 10001</div>
-          <div className="info-item">📞 +1 (555) 123-4567</div>
-          <div className="info-item">✉️ hello@stylebymk.com</div>
-          <div className="info-item">⏰ Mon-Sat: 9am - 8pm</div>
+          <div className="info-item"><i class="fa-solid fa-location-pin"></i> Beaver House 2nd floor, Hairtips salon</div>
+          <div className="info-item"><i class="fa-solid fa-phone"></i> +254 712 608661</div>
+          <div className="info-item"><i class="fa-solid fa-envelope"></i> davidmuigai241@gmail.com</div>
+          <div className="info-item"><i class="fa-solid fa-alarm-clock"></i> Mon-Sat: 8am - 6pm</div>
         </div>
         
         <form onSubmit={handleSubmit} className="contact-form">
