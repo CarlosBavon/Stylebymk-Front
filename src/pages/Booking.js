@@ -5,7 +5,7 @@ import GoldButton from "../components/GoldButton";
 import { createBooking } from "../api";
 import axios from "axios";
 import "./Booking.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Booking = () => {
   const [formData, setFormData] = useState({
@@ -35,20 +35,6 @@ const Booking = () => {
     "Feed-in Braids",
     "Fulani Braids",
     "Crochet Braids",
-  ];
-
-  // Available time slots (1-hour intervals)
-  const allTimeSlots = [
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
   ];
 
   // Fetch booked slots when date changes
