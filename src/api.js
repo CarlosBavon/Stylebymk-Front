@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://stylebymk-back.onrender.com/api" });
+const API = axios.create({ baseURL: "https://stylebymk-back.onrender.com" });
 
 export const createBooking = (data) => API.post("/bookings", data);
 export const createEnquiry = (data) => API.post("/enquiries", data);
