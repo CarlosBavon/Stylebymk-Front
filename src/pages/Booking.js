@@ -45,7 +45,7 @@ const Booking = () => {
       try {
         const dateStr = formData.date.toISOString().split("T")[0];
         const response = await axios.get(
-          `http://localhost:5000/api/bookings/slots/${dateStr}`,
+          `https://stylebymk-back.onrender.com/api/bookings/slots/${dateStr}`,
         );
         setAvailableTimes(response.data.availableTimes || []);
         if (
