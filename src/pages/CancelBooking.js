@@ -28,9 +28,9 @@ const CancelBooking = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('hhttps://stylebymk-back.onrender.com/api/bookings/cancel', formData);
+      await axios.post('https://stylebymk-back.onrender.com/api/bookings/cancel', formData);
       setMessage({ type: 'success', text: 'Your booking has been cancelled.' });
-      setTimeout(() => navigate('/'), 3000);
+      setTimeout(() => navigate('/'), 2000);
     } catch (error) {
       setMessage({ type: 'error', text: error.response?.data?.message || 'Cancellation failed.' });
     } finally {
