@@ -15,8 +15,8 @@ const Home = () => {
       
       <div className="home-content fade-up">
         <h1 className="main-title">
-          <span className="gold-text-glow">STYLE</span>
-          <span>BYMK</span>
+          <span>STYLEBY</span>
+          <span className="gold-text-glow">MK</span>
         </h1>
         <p className="subtitle">Experience The Art of Hair Design</p>
         <div className="cta-buttons">
