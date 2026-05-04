@@ -398,9 +398,6 @@ const Booking = () => {
       {/* Deposit Payment Modal - FIXED BUTTONS */}
       {showDepositModal && (
         <div className="modal-overlay">
-          <div style={{ background: "red", padding: 10 }}>
-            TEST BUTTONS SHOULD BE HERE
-          </div>
           <div className="deposit-modal">
             <h2>Complete Your Deposit</h2>
             <div className="modal-details">
