@@ -10,7 +10,6 @@ import {
 import axios from "axios";
 import "./Booking.css";
 import { Link } from "react-router-dom";
-import { createBooking, initiateMpesaPayment, checkPaymentStatus } from "../api";
 
 // Hairstyle prices in KES
 const servicePrices = {
