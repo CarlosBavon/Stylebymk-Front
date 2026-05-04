@@ -7,12 +7,24 @@ import axios from "axios";
 import "./Booking.css";
 import { Link } from "react-router-dom";
 
+// Helper: get local YYYY-MM-DD from a Date object (no timezone shift)
+const getLocalDateString = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 const Booking = () => {
+  // Set initial date to TOMORROW (not today)
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    date: new Date(),
+    date: tomorrow,
     time: "",
     service: "Cornrows",
   });
@@ -21,7 +33,7 @@ const Booking = () => {
   const [message, setMessage] = useState("");
   const [fetchingSlots, setFetchingSlots] = useState(false);
 
-  // New service list - only hairstyles, no cutting
+  // Service list (unchanged)
   const services = [
     "Cornrows",
     "Twists",
@@ -37,13 +49,13 @@ const Booking = () => {
     "Crochet Braids",
   ];
 
-  // Fetch booked slots when date changes
+  // Fetch booked slots when date changes (using local date string)
   useEffect(() => {
     const fetchBookedSlots = async () => {
       if (!formData.date) return;
       setFetchingSlots(true);
       try {
-        const dateStr = formData.date.toISOString().split("T")[0];
+        const dateStr = getLocalDateString(formData.date);
         const response = await axios.get(
           `https://stylebymk-back.onrender.com/api/bookings/slots/${dateStr}`,
         );
@@ -85,30 +97,43 @@ const Booking = () => {
     }
     setLoading(true);
     try {
-      await createBooking(formData);
+      // Prepare payload with date as local string (YYYY-MM-DD)
+      const payload = {
+        ...formData,
+        date: getLocalDateString(formData.date),
+      };
+      await createBooking(payload);
       setMessage({
         type: "success",
         text: "Booking confirmed! Check your email.",
       });
+      // Reset form, setting date to tomorrow again
+      const newTomorrow = new Date();
+      newTomorrow.setDate(newTomorrow.getDate() + 1);
       setFormData({
         name: "",
         email: "",
         phone: "",
-        date: new Date(),
+        date: newTomorrow,
         time: "",
         service: "Cornrows",
       });
-      // Refresh available slots for the same date (though form resets date to today)
     } catch (error) {
       setMessage({
         type: "error",
-        text: "Something went wrong. Please try again.",
+        text:
+          error.response?.data?.message ||
+          "Something went wrong. Please try again.",
       });
     } finally {
       setLoading(false);
       setTimeout(() => setMessage(""), 5000);
     }
   };
+
+  // Minimum selectable date = tomorrow
+  const minSelectableDate = new Date();
+  minSelectableDate.setDate(minSelectableDate.getDate() + 1);
 
   return (
     <div className="booking-page">
@@ -159,7 +184,7 @@ const Booking = () => {
             <DatePicker
               selected={formData.date}
               onChange={handleDateChange}
-              minDate={new Date()}
+              minDate={minSelectableDate}
               className="date-picker"
               required
             />
