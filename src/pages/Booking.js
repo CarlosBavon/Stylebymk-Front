@@ -168,48 +168,43 @@ const Booking = () => {
 
   // Poll payment status
   const pollPaymentStatus = async (checkoutRequestId) => {
-    const maxAttempts = 60; // 60 attempts = 3 minutes (3s interval)
+    const maxAttempts = 20; // 20 attempts * 3 sec = 60 seconds
     let attempts = 0;
 
-    // Wait 5 seconds before first poll to let Safaricom register transaction
-    setTimeout(async () => {
+    // Wait 15 seconds before starting polls (gives time for STK to register)
+    setTimeout(() => {
       const interval = setInterval(async () => {
         attempts++;
         try {
           const response = await checkPaymentStatus(checkoutRequestId);
           const data = response.data;
-          console.log(`Poll attempt ${attempts}:`, data);
+          console.log(`Poll ${attempts}:`, data);
 
-          if (data.success && data.resultCode === 0) {
-            // Payment successful
+          if (data.resultCode === 0) {
+            // Success
             clearInterval(interval);
             setPaymentStatus("success");
             await finalizeBookingWithPayment(data);
           } else if (data.resultCode === 1032) {
-            // User cancelled - permanent failure
+            // User cancelled
             clearInterval(interval);
             setPaymentStatus("failed");
             setMessage({
               type: "error",
-              text: "Payment was cancelled. Please try again.",
+              text: "Payment cancelled. Please try again.",
             });
             setPaymentProcessing(false);
-          } else if (data.resultCode === 1037) {
-            // Timeout - give more attempts, don't fail yet
-            console.log("Payment timeout, still waiting...");
-          } else if (
-            data.resultCode &&
-            data.resultCode !== 1 &&
-            data.resultCode !== 1037
-          ) {
-            // Any other failure code (e.g., 2001, 500)
-            clearInterval(interval);
-            setPaymentStatus("failed");
-            setMessage({
-              type: "error",
-              text: data.resultDesc || "Payment failed. Please try again.",
-            });
-            setPaymentProcessing(false);
+          } else if (data.resultCode !== 1 && data.resultCode !== undefined) {
+            // Any other error code (e.g., 2001, 500) – but only fail if we have tried enough times
+            if (attempts > 10) {
+              clearInterval(interval);
+              setPaymentStatus("failed");
+              setMessage({
+                type: "error",
+                text: data.resultDesc || "Payment failed. Please try again.",
+              });
+              setPaymentProcessing(false);
+            }
           }
 
           if (attempts >= maxAttempts) {
@@ -224,15 +219,15 @@ const Booking = () => {
             }
           }
         } catch (error) {
-          console.error("Polling error:", error);
+          console.error("Poll error:", error);
           if (attempts >= maxAttempts) {
             clearInterval(interval);
             setPaymentStatus("failed");
             setPaymentProcessing(false);
           }
         }
-      }, 3000); // poll every 3 seconds
-    }, 5000); // initial delay 5 seconds
+      }, 3000);
+    }, 15000); // 15 second initial delay
   };
 
   // Finalize booking after successful payment
