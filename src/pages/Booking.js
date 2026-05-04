@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import "./Booking.css";
 import { Link } from "react-router-dom";
+import { createBooking, initiateMpesaPayment, checkPaymentStatus } from "../api";
 
 // Hairstyle prices in KES
 const servicePrices = {
@@ -395,7 +396,7 @@ const Booking = () => {
         </form>
       </div>
 
-      {/* Deposit Payment Modal */}
+      {/* Deposit Payment Modal - FIXED VERSION */}
       {showDepositModal && (
         <div className="modal-overlay">
           <div className="deposit-modal">
@@ -419,6 +420,7 @@ const Booking = () => {
               </p>
             </div>
 
+            {/* Always show payment buttons unless processing or success/failed */}
             {paymentStatus === "idle" && (
               <div className="modal-actions">
                 <button
@@ -430,7 +432,11 @@ const Booking = () => {
                 </button>
                 <button
                   className="cancel-btn"
-                  onClick={() => setShowDepositModal(false)}
+                  onClick={() => {
+                    setShowDepositModal(false);
+                    setPaymentStatus("idle");
+                    setPaymentProcessing(false);
+                  }}
                 >
                   Cancel
                 </button>
