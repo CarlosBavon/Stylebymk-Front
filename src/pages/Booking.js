@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 // Hairstyle prices in KES
 const servicePrices = {
-  Cornrows: 1500,
+  Cornrows: 150,
   Twists: 1800,
   "Barrel Twists": 2000,
   "Senegalese Twists": 2200,
