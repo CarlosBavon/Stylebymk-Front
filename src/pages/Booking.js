@@ -53,7 +53,7 @@ const Booking = () => {
     servicePrices["Cornrows"] * 0.9,
   );
   const [paymentProcessing, setPaymentProcessing] = useState(false);
-  const [paymentStatus, setPaymentStatus] = useState(""); // idle, processing, success, failed
+  const [paymentStatus, setPaymentStatus] = useState("idle"); // idle, processing, success, failed
   const [checkoutRequestId, setCheckoutRequestId] = useState("");
 
   const services = Object.keys(servicePrices);
@@ -395,9 +395,12 @@ const Booking = () => {
         </form>
       </div>
 
-      {/* Deposit Payment Modal - FIXED VERSION */}
+      {/* Deposit Payment Modal - FIXED BUTTONS */}
       {showDepositModal && (
         <div className="modal-overlay">
+          <div style={{ background: "red", padding: 10 }}>
+            TEST BUTTONS SHOULD BE HERE
+          </div>
           <div className="deposit-modal">
             <h2>Complete Your Deposit</h2>
             <div className="modal-details">
@@ -419,14 +422,10 @@ const Booking = () => {
               </p>
             </div>
 
-            {/* Always show payment buttons unless processing or success/failed */}
-            {paymentStatus === "idle" && (
+            {/* Show buttons when not processing and not completed/failed */}
+            {!paymentProcessing && paymentStatus === "idle" && (
               <div className="modal-actions">
-                <button
-                  className="pay-btn"
-                  onClick={handleInitiatePayment}
-                  disabled={paymentProcessing}
-                >
+                <button className="pay-btn" onClick={handleInitiatePayment}>
                   Pay KES {depositAmount} via M-Pesa
                 </button>
                 <button
@@ -442,7 +441,7 @@ const Booking = () => {
               </div>
             )}
 
-            {paymentStatus === "processing" && (
+            {paymentProcessing && paymentStatus === "processing" && (
               <div className="payment-processing">
                 <div className="spinner"></div>
                 <p>Waiting for M-Pesa PIN entry on your phone...</p>
