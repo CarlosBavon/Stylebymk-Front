@@ -168,54 +168,71 @@ const Booking = () => {
 
   // Poll payment status
   const pollPaymentStatus = async (checkoutRequestId) => {
-    const maxAttempts = 30; // 30 seconds
+    const maxAttempts = 60; // 60 attempts = 3 minutes (3s interval)
     let attempts = 0;
 
-    const interval = setInterval(async () => {
-      attempts++;
-      try {
-        const statusResponse = await checkPaymentStatus(checkoutRequestId);
+    // Wait 5 seconds before first poll to let Safaricom register transaction
+    setTimeout(async () => {
+      const interval = setInterval(async () => {
+        attempts++;
+        try {
+          const response = await checkPaymentStatus(checkoutRequestId);
+          const data = response.data;
+          console.log(`Poll attempt ${attempts}:`, data);
 
-        if (statusResponse.success && statusResponse.resultCode === 0) {
-          // Payment successful
-          clearInterval(interval);
-          setPaymentStatus("success");
-          // Now create the booking with payment info
-          await finalizeBookingWithPayment(statusResponse);
-        } else if (
-          statusResponse.resultCode &&
-          statusResponse.resultCode !== 0
-        ) {
-          // Payment failed
-          clearInterval(interval);
-          setPaymentStatus("failed");
-          setMessage({
-            type: "error",
-            text: statusResponse.resultDesc || "Payment failed",
-          });
-          setPaymentProcessing(false);
-        }
-
-        if (attempts >= maxAttempts) {
-          clearInterval(interval);
-          if (paymentStatus !== "success") {
+          if (data.success && data.resultCode === 0) {
+            // Payment successful
+            clearInterval(interval);
+            setPaymentStatus("success");
+            await finalizeBookingWithPayment(data);
+          } else if (data.resultCode === 1032) {
+            // User cancelled - permanent failure
+            clearInterval(interval);
             setPaymentStatus("failed");
             setMessage({
               type: "error",
-              text: "Payment timeout. Please try again.",
+              text: "Payment was cancelled. Please try again.",
+            });
+            setPaymentProcessing(false);
+          } else if (data.resultCode === 1037) {
+            // Timeout - give more attempts, don't fail yet
+            console.log("Payment timeout, still waiting...");
+          } else if (
+            data.resultCode &&
+            data.resultCode !== 1 &&
+            data.resultCode !== 1037
+          ) {
+            // Any other failure code (e.g., 2001, 500)
+            clearInterval(interval);
+            setPaymentStatus("failed");
+            setMessage({
+              type: "error",
+              text: data.resultDesc || "Payment failed. Please try again.",
             });
             setPaymentProcessing(false);
           }
+
+          if (attempts >= maxAttempts) {
+            clearInterval(interval);
+            if (paymentStatus !== "success") {
+              setPaymentStatus("failed");
+              setMessage({
+                type: "error",
+                text: "Payment timeout. Please try again.",
+              });
+              setPaymentProcessing(false);
+            }
+          }
+        } catch (error) {
+          console.error("Polling error:", error);
+          if (attempts >= maxAttempts) {
+            clearInterval(interval);
+            setPaymentStatus("failed");
+            setPaymentProcessing(false);
+          }
         }
-      } catch (error) {
-        console.error("Status check error:", error);
-        if (attempts >= maxAttempts) {
-          clearInterval(interval);
-          setPaymentStatus("failed");
-          setPaymentProcessing(false);
-        }
-      }
-    }, 2000);
+      }, 3000); // poll every 3 seconds
+    }, 5000); // initial delay 5 seconds
   };
 
   // Finalize booking after successful payment
