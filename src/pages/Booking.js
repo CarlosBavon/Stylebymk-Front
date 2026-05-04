@@ -2,10 +2,30 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import GoldButton from "../components/GoldButton";
-import { createBooking } from "../api";
+import {
+  createBooking,
+  initiateMpesaPayment,
+  checkPaymentStatus,
+} from "../api";
 import axios from "axios";
 import "./Booking.css";
 import { Link } from "react-router-dom";
+
+// Hairstyle prices in KES
+const servicePrices = {
+  Cornrows: 1500,
+  Twists: 1800,
+  "Barrel Twists": 2000,
+  "Senegalese Twists": 2200,
+  "Box Braids": 2500,
+  "Locs (Dreadlocks)": 3000,
+  "Faux Locs": 2800,
+  "Goddess Locs": 3500,
+  "Knotless Braids": 2700,
+  "Feed-in Braids": 2300,
+  "Fulani Braids": 2600,
+  "Crochet Braids": 2400,
+};
 
 const Booking = () => {
   const [formData, setFormData] = useState({
@@ -21,21 +41,30 @@ const Booking = () => {
   const [message, setMessage] = useState("");
   const [fetchingSlots, setFetchingSlots] = useState(false);
 
-  // New service list - only hairstyles, no cutting
-  const services = [
-    "Cornrows",
-    "Twists",
-    "Barrel Twists",
-    "Senegalese Twists",
-    "Box Braids",
-    "Locs (Dreadlocks)",
-    "Faux Locs",
-    "Goddess Locs",
-    "Knotless Braids",
-    "Feed-in Braids",
-    "Fulani Braids",
-    "Crochet Braids",
-  ];
+  // Deposit modal states
+  const [showDepositModal, setShowDepositModal] = useState(false);
+  const [selectedServicePrice, setSelectedServicePrice] = useState(
+    servicePrices["Cornrows"],
+  );
+  const [depositAmount, setDepositAmount] = useState(
+    servicePrices["Cornrows"] * 0.1,
+  );
+  const [remainingAmount, setRemainingAmount] = useState(
+    servicePrices["Cornrows"] * 0.9,
+  );
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState(""); // idle, processing, success, failed
+  const [checkoutRequestId, setCheckoutRequestId] = useState("");
+
+  const services = Object.keys(servicePrices);
+
+  // Update price when service changes
+  useEffect(() => {
+    const price = servicePrices[formData.service] || 1500;
+    setSelectedServicePrice(price);
+    setDepositAmount(price * 0.1);
+    setRemainingAmount(price * 0.9);
+  }, [formData.service]);
 
   // Fetch booked slots when date changes
   useEffect(() => {
@@ -62,7 +91,6 @@ const Booking = () => {
       }
     };
     fetchBookedSlots();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.date]);
 
   const handleChange = (e) => {
@@ -73,7 +101,8 @@ const Booking = () => {
     setFormData({ ...formData, date, time: "" });
   };
 
-  const handleSubmit = async (e) => {
+  // Open deposit modal instead of direct booking
+  const handleOpenDepositModal = (e) => {
     e.preventDefault();
     if (!formData.time) {
       setMessage({
@@ -83,13 +112,134 @@ const Booking = () => {
       setTimeout(() => setMessage(""), 3000);
       return;
     }
-    setLoading(true);
+    setShowDepositModal(true);
+  };
+
+  // Initiate M-Pesa payment
+  const handleInitiatePayment = async () => {
+    setPaymentProcessing(true);
+    setPaymentStatus("processing");
+
     try {
-      await createBooking(formData);
+      // Format phone number (254XXXXXXXXX)
+      let phoneNumber = formData.phone.replace(/\D/g, "");
+      if (phoneNumber.startsWith("0")) {
+        phoneNumber = "254" + phoneNumber.substring(1);
+      }
+      if (!phoneNumber.startsWith("254")) {
+        phoneNumber = "254" + phoneNumber;
+      }
+
+      const paymentData = {
+        phoneNumber: phoneNumber,
+        amount: Math.round(depositAmount), // Round to nearest KES
+        accountReference: `DEP${Date.now()}`,
+        transactionDesc: `Deposit for ${formData.service}`,
+        bookingData: formData,
+        totalAmount: selectedServicePrice,
+        depositAmount: depositAmount,
+        remainingAmount: remainingAmount,
+      };
+
+      const response = await initiateMpesaPayment(paymentData);
+
+      if (response.success) {
+        setCheckoutRequestId(response.checkoutRequestID);
+        // Start polling for payment status
+        pollPaymentStatus(response.checkoutRequestID);
+      } else {
+        setPaymentStatus("failed");
+        setMessage({
+          type: "error",
+          text: response.message || "Payment initialization failed",
+        });
+        setPaymentProcessing(false);
+      }
+    } catch (error) {
+      console.error("Payment error:", error);
+      setPaymentStatus("failed");
+      setMessage({
+        type: "error",
+        text: "Failed to initiate payment. Please try again.",
+      });
+      setPaymentProcessing(false);
+    }
+  };
+
+  // Poll payment status
+  const pollPaymentStatus = async (checkoutRequestId) => {
+    const maxAttempts = 30; // 30 seconds
+    let attempts = 0;
+
+    const interval = setInterval(async () => {
+      attempts++;
+      try {
+        const statusResponse = await checkPaymentStatus(checkoutRequestId);
+
+        if (statusResponse.success && statusResponse.resultCode === 0) {
+          // Payment successful
+          clearInterval(interval);
+          setPaymentStatus("success");
+          // Now create the booking with payment info
+          await finalizeBookingWithPayment(statusResponse);
+        } else if (
+          statusResponse.resultCode &&
+          statusResponse.resultCode !== 0
+        ) {
+          // Payment failed
+          clearInterval(interval);
+          setPaymentStatus("failed");
+          setMessage({
+            type: "error",
+            text: statusResponse.resultDesc || "Payment failed",
+          });
+          setPaymentProcessing(false);
+        }
+
+        if (attempts >= maxAttempts) {
+          clearInterval(interval);
+          if (paymentStatus !== "success") {
+            setPaymentStatus("failed");
+            setMessage({
+              type: "error",
+              text: "Payment timeout. Please try again.",
+            });
+            setPaymentProcessing(false);
+          }
+        }
+      } catch (error) {
+        console.error("Status check error:", error);
+        if (attempts >= maxAttempts) {
+          clearInterval(interval);
+          setPaymentStatus("failed");
+          setPaymentProcessing(false);
+        }
+      }
+    }, 2000);
+  };
+
+  // Finalize booking after successful payment
+  const finalizeBookingWithPayment = async (paymentData) => {
+    try {
+      const bookingPayload = {
+        ...formData,
+        depositPaid: true,
+        depositAmount: depositAmount,
+        totalAmount: selectedServicePrice,
+        remainingAmount: remainingAmount,
+        mpesaReceiptNumber: paymentData.mpesaReceiptNumber,
+        transactionId: paymentData.transactionId,
+        paymentStatus: "completed",
+      };
+
+      const response = await createBooking(bookingPayload);
+
       setMessage({
         type: "success",
-        text: "Booking confirmed! Check your email.",
+        text: `Booking confirmed! Deposit of KES ${depositAmount} paid. Remaining KES ${remainingAmount} to pay at salon. Check your email.`,
       });
+
+      // Reset form
       setFormData({
         name: "",
         email: "",
@@ -98,15 +248,17 @@ const Booking = () => {
         time: "",
         service: "Cornrows",
       });
-      // Refresh available slots for the same date (though form resets date to today)
+      setShowDepositModal(false);
+      setPaymentProcessing(false);
+
+      setTimeout(() => setMessage(""), 8000);
     } catch (error) {
+      console.error("Booking creation error:", error);
       setMessage({
         type: "error",
-        text: "Something went wrong. Please try again.",
+        text: "Payment received but booking failed. Please contact support.",
       });
-    } finally {
-      setLoading(false);
-      setTimeout(() => setMessage(""), 5000);
+      setPaymentProcessing(false);
     }
   };
 
@@ -120,7 +272,7 @@ const Booking = () => {
       </div>
 
       <div className="booking-form-container">
-        <form onSubmit={handleSubmit} className="booking-form">
+        <form onSubmit={handleOpenDepositModal} className="booking-form">
           <div className="form-group">
             <label>Full Name</label>
             <input
@@ -144,12 +296,13 @@ const Booking = () => {
           </div>
 
           <div className="form-group">
-            <label>Phone Number</label>
+            <label>Phone Number (for M-Pesa payment)</label>
             <input
               type="tel"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
+              placeholder="0712345678"
               required
             />
           </div>
@@ -203,17 +356,32 @@ const Booking = () => {
             >
               {services.map((service) => (
                 <option key={service} value={service}>
-                  {service}
+                  {service} - KES {servicePrices[service]}
                 </option>
               ))}
             </select>
+          </div>
+
+          <div className="price-summary">
+            <p>
+              Total Price:{" "}
+              <strong className="gold-text">KES {selectedServicePrice}</strong>
+            </p>
+            <p>
+              Deposit (10%):{" "}
+              <strong className="gold-text">KES {depositAmount}</strong>
+            </p>
+            <p>
+              Pay at Salon:{" "}
+              <strong className="gold-text">KES {remainingAmount}</strong>
+            </p>
           </div>
 
           <GoldButton
             type="submit"
             disabled={loading || !formData.time || fetchingSlots}
           >
-            {loading ? "Processing..." : "Confirm Booking "}
+            {loading ? "Processing..." : "Proceed to Deposit"}
           </GoldButton>
           <li className="cancel">
             <Link to="/cancel" className="cancel-link">
@@ -226,6 +394,83 @@ const Booking = () => {
           )}
         </form>
       </div>
+
+      {/* Deposit Payment Modal */}
+      {showDepositModal && (
+        <div className="modal-overlay">
+          <div className="deposit-modal">
+            <h2>Complete Your Deposit</h2>
+            <div className="modal-details">
+              <p>
+                <strong>Hairstyle:</strong> {formData.service}
+              </p>
+              <p>
+                <strong>Total Amount:</strong> KES {selectedServicePrice}
+              </p>
+              <p>
+                <strong>Deposit Required (10%):</strong> KES {depositAmount}
+              </p>
+              <p>
+                <strong>Remaining to pay at salon:</strong> KES{" "}
+                {remainingAmount}
+              </p>
+              <p>
+                <strong>Phone:</strong> {formData.phone}
+              </p>
+            </div>
+
+            {paymentStatus === "idle" && (
+              <div className="modal-actions">
+                <button
+                  className="pay-btn"
+                  onClick={handleInitiatePayment}
+                  disabled={paymentProcessing}
+                >
+                  Pay KES {depositAmount} via M-Pesa
+                </button>
+                <button
+                  className="cancel-btn"
+                  onClick={() => setShowDepositModal(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+
+            {paymentStatus === "processing" && (
+              <div className="payment-processing">
+                <div className="spinner"></div>
+                <p>Waiting for M-Pesa PIN entry on your phone...</p>
+                <p className="instruction">
+                  Please check your phone and enter your M-Pesa PIN to complete
+                  payment.
+                </p>
+              </div>
+            )}
+
+            {paymentStatus === "success" && (
+              <div className="payment-success">
+                <p>✓ Payment successful! Your booking is being confirmed...</p>
+              </div>
+            )}
+
+            {paymentStatus === "failed" && (
+              <div className="payment-failed">
+                <p>✗ Payment failed. Please try again.</p>
+                <button
+                  className="retry-btn"
+                  onClick={() => {
+                    setPaymentStatus("idle");
+                    setPaymentProcessing(false);
+                  }}
+                >
+                  Try Again
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

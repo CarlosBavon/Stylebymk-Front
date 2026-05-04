@@ -21,3 +21,75 @@
   gap: 1.5rem;
   margin-top: 2rem;
 }
+
+.penalty-warning {
+  margin-top: 25px;
+  padding: 20px;
+  background: rgba(255, 68, 68, 0.1);
+  border: 2px solid #ff4444;
+  border-radius: 10px;
+}
+
+.penalty-warning h3 {
+  color: #ff4444;
+  margin-bottom: 15px;
+}
+
+.booking-summary {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+.penalty-details {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+.warning-text {
+  color: #ffaa33;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.cancel-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.confirm-cancel-btn {
+  background: #ff4444;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.confirm-cancel-btn:hover:not(:disabled) {
+  background: #cc0000;
+  transform: translateY(-2px);
+}
+
+.keep-booking-btn {
+  background: #D4AF37;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.keep-booking-btn:hover {
+  background: #ffd700;
+  transform: translateY(-2px);
+}
