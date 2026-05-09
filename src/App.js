@@ -1,15 +1,15 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-import Booking from './pages/Booking';
-import Enquiry from './pages/Enquiry';
-import Contact from './pages/Contact';
-import Gallery from './pages/Gallery';
-import CancelBooking from './pages/CancelBooking';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./pages/components/Navbar";
+import Footer from "./pages/components/Footer";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Booking from "./pages/Booking";
+import Enquiry from "./pages/Enquiry";
+import Contact from "./pages/Contact";
+import Gallery from "./pages/Gallery";
+import CancelBooking from "./pages/CancelBooking";
+import "./App.css";
 
 function App() {
   return (

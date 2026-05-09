@@ -1,7 +1,7 @@
-import React from 'react';
-import GoldButton from '../components/GoldButton';
-import './Home.css';
-import Video from '../assets/video/video.mp4';
+import React from "react";
+import GoldButton from "./components/GoldButton";
+import "./Home.css";
+import Video from "../assets/video/video.mp4";
 
 const Home = () => {
   return (
@@ -12,7 +12,7 @@ const Home = () => {
         </video>
         <div className="video-overlay"></div>
       </div>
-      
+
       <div className="home-content fade-up">
         <h1 className="main-title">
           <span>STYLEBY</span>
@@ -20,8 +20,14 @@ const Home = () => {
         </h1>
         <p className="subtitle">Experience The Art of Hair Design</p>
         <div className="cta-buttons">
-          <GoldButton to="/booking">Book Appointment <i class="fa-solid fa-calendar" style={{color:"black"}}></i></GoldButton>
-          <GoldButton to="/enquiry">Make Enquiry <i class="fa-solid fa-note-sticky" style={{color:"black"}}></i></GoldButton>
+          <GoldButton to="/booking">
+            Book Appointment{" "}
+            <i class="fa-solid fa-calendar" style={{ color: "black" }}></i>
+          </GoldButton>
+          <GoldButton to="/enquiry">
+            Make Enquiry{" "}
+            <i class="fa-solid fa-note-sticky" style={{ color: "black" }}></i>
+          </GoldButton>
         </div>
         <div className="scroll-indicator">
           <div className="mouse"></div>

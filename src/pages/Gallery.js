@@ -52,7 +52,7 @@ const Gallery = () => {
     <div className="gallery-page">
       <div className="gallery-header">
         <h1>
-          The <span className="gold-text">Portfolio</span>
+          The <span className="gold-text">Gallery</span>
         </h1>
         <p>A showcase of our finest work</p>
       </div>
