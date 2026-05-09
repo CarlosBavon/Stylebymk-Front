@@ -23,7 +23,7 @@ const Navbar = () => {
           <div className="profile-container">
             <img src={myLogo} alt="Profile Logo" className="profile-img" />
           </div>
-          <span className="logo-text">STYLEBY</span>
+          <span className="logo-text">STYLESBY</span>
           <span className="logo-gold">MK</span>
         </Link>
 

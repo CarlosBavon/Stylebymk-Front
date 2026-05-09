@@ -13,7 +13,7 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-section">
           <h3 className="footer-title">
-            <span className="gold-text">STYLE</span>BYMK
+            <span className="gold-text">STYLESBY</span>MK
           </h3>
           <p className="footer-tagline">Where Style Meets Elegance</p>
           <div className="social-icons">
@@ -49,7 +49,7 @@ const Footer = () => {
       </div>
       
       <div className="footer-bottom">
-        <p>&copy; 2026 STYLEBYMK | All Rights Reserved | Crafted with <span style={{color: '#D4AF37'}}>✦</span></p>
+        <p>&copy; 2026 STYLESBYMK | All Rights Reserved | Crafted with <span style={{color: '#D4AF37'}}>✦</span></p>
       </div>
     </footer>
   );

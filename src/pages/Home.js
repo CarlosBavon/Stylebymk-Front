@@ -15,7 +15,7 @@ const Home = () => {
 
       <div className="home-content fade-up">
         <h1 className="main-title">
-          <span>STYLEBY</span>
+          <span>STYLESBY</span>
           <span className="gold-text-glow">MK</span>
         </h1>
         <p className="subtitle">Experience The Art of Hair Design</p>
