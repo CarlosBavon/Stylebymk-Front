@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GoldButton from "./components/GoldButton";
+import GoldButton from "../components/GoldButton";
 import { createEnquiry } from "../api";
 import "./Enquiry.css";
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import GoldButton from "./components/GoldButton";
+import GoldButton from "../components/GoldButton";
 import { createBooking } from "../api";
 import axios from "axios";
 import "./Booking.css";

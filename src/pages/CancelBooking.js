@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import GoldButton from "./components/GoldButton";
+import GoldButton from "../components/GoldButton";
 import "./CancelBooking.css";
 
 const CancelBooking = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import GoldButton from "./components/GoldButton";
+import GoldButton from "../components/GoldButton";
 import "./Home.css";
 import Video from "../assets/video/video.mp4";
 
