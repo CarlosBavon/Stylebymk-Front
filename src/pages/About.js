@@ -11,13 +11,13 @@ const About = () => {
       <div className="about-content">
         <div className="about-card fade-up">
           <div className="about-icon"><i class="fa-solid fa-user-gear"></i></div>
-          <h3>10+ Years Experience</h3>
+          <h3>5+ Years Experience</h3>
           <p>Mastering the art of hairstyling with passion and precision</p>
         </div>
         
         <div className="about-card fade-up">
           <div className="about-icon"><i class="fa-solid fa-trophy"></i></div>
-          <h3>Award Winning</h3>
+          <h3>Award Winning</h3> 
           <p>Recognized for excellence in hair design and customer service</p>
         </div>
         
