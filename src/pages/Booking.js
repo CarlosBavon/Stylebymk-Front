@@ -15,10 +15,6 @@ const getLocalDateString = (date) => {
   return `${year}-${month}-${day}`;
 };
 
-// Use environment variable for API base, fallback to production URL
-const API_BASE =
-  process.env.REACT_APP_API_URL || "https://stylebymk-back.onrender.com/api";
-
 const Booking = () => {
   // Set initial date to TOMORROW (not today)
   const tomorrow = new Date();
@@ -37,7 +33,7 @@ const Booking = () => {
   const [message, setMessage] = useState("");
   const [fetchingSlots, setFetchingSlots] = useState(false);
 
-  // Service list
+  // Service list (unchanged)
   const services = [
     "Cornrows",
     "Twists",
@@ -53,7 +49,7 @@ const Booking = () => {
     "Crochet Braids",
   ];
 
-  // Fetch booked slots when date changes
+  // Fetch booked slots when date changes (using local date string)
   useEffect(() => {
     const fetchBookedSlots = async () => {
       if (!formData.date) return;
@@ -61,7 +57,7 @@ const Booking = () => {
       try {
         const dateStr = getLocalDateString(formData.date);
         const response = await axios.get(
-          `${API_BASE}/bookings/slots/${dateStr}`,
+          `https://stylebymk-back.onrender.com/api/bookings/slots/${dateStr}`,
         );
         setAvailableTimes(response.data.availableTimes || []);
         if (
@@ -101,6 +97,7 @@ const Booking = () => {
     }
     setLoading(true);
     try {
+      // Prepare payload with date as local string (YYYY-MM-DD)
       const payload = {
         ...formData,
         date: getLocalDateString(formData.date),
@@ -108,9 +105,9 @@ const Booking = () => {
       await createBooking(payload);
       setMessage({
         type: "success",
-        text: "Booking confirmed! A calendar invitation has been sent to your email. Please check your inbox (and spam folder).",
+        text: "Booking confirmed! Check your email.",
       });
-      // Reset form
+      // Reset form, setting date to tomorrow again
       const newTomorrow = new Date();
       newTomorrow.setDate(newTomorrow.getDate() + 1);
       setFormData({
@@ -134,6 +131,7 @@ const Booking = () => {
     }
   };
 
+  // Minimum selectable date = tomorrow
   const minSelectableDate = new Date();
   minSelectableDate.setDate(minSelectableDate.getDate() + 1);
 
@@ -143,7 +141,7 @@ const Booking = () => {
         <h1>
           Book Your <span className="gold-text">Hairstyle</span>
         </h1>
-        <p>Reserve your spot – instant confirmation, calendar invite sent.</p>
+        <p>Reserve your spot for a transformative hairstyling session</p>
       </div>
 
       <div className="booking-form-container">
@@ -240,7 +238,7 @@ const Booking = () => {
             type="submit"
             disabled={loading || !formData.time || fetchingSlots}
           >
-            {loading ? "Processing..." : "Confirm Booking"}
+            {loading ? "Processing..." : "Confirm Booking "}
           </GoldButton>
           <li className="cancel">
             <Link to="/cancel" className="cancel-link">
