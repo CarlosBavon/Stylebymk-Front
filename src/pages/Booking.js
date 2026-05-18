@@ -105,7 +105,7 @@ const Booking = () => {
       await createBooking(payload);
       setMessage({
         type: "success",
-        text: "Booking confirmed! Check your email.",
+        text: "Booking confirmed! A calendar invitation has been sent to your email. Please check your inbox (and spam folder).",
       });
       // Reset form, setting date to tomorrow again
       const newTomorrow = new Date();
