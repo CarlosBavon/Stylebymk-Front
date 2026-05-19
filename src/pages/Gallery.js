@@ -10,7 +10,7 @@ const Gallery = () => {
   const allVideos = [
     {
       id: 1,
-      url: "https://assets.mixkit.co/videos/preview/mixkit-hairdresser-cutting-hair-32157-large.mp4",
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226897/Screen_Recording_2026-05-19_185532_lywhoy.mp4",
       poster: "https://assets.mixkit.co/videos/preview/mixkit-hairdresser-cutting-hair-32157-large.jpg",
       title: "Haircut & Style",
       category: "cornrows"
@@ -24,7 +24,7 @@ const Gallery = () => {
     },
     {
       id: 3,
-      url: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.mp4",
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226898/Screen_Recording_2026-05-19_185741_f4vdsq.mp4",
       poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
       title: "Braiding Artistry",
       category: "cornrows"
@@ -63,7 +63,112 @@ const Gallery = () => {
       poster: "https://assets.mixkit.co/videos/preview/mixkit-young-woman-brushing-her-hair-32195-large.jpg",
       title: "Silky Smooth",
       category: "color"
-    }
+    },
+    {
+      id: 9,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226898/Screen_Recording_2026-05-19_185834_qmu8gq.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 10,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226899/Screen_Recording_2026-05-19_185943_z4jklx.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 11,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226903/Screen_Recording_2026-05-19_190035_vu9sc1.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 12,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226904/Screen_Recording_2026-05-19_190256_xlvcob.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 13,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226905/Screen_Recording_2026-05-19_190522_ewksue.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 14,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226906/Screen_Recording_2026-05-19_190353_t89apx.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 15,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226907/Screen_Recording_2026-05-19_190631_ozppq9.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 16,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226908/Screen_Recording_2026-05-19_190840_sqny9r.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 17,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226908/Screen_Recording_2026-05-19_190939_slipik.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 18,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226908/Screen_Recording_2026-05-19_191016_hmqm9h.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 19,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226908/Screen_Recording_2026-05-19_190146_rbhfd2.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 20,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226909/Screen_Recording_2026-05-19_191710_agque3.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 21,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226911/Screen_Recording_2026-05-19_190731_yfgc0f.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 22,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226918/Screen_Recording_2026-05-19_192554_opo5nm.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 23,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226918/Screen_Recording_2026-05-19_192410_bn1teh.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
   ];
 
   // Category filter logic (same as before)
