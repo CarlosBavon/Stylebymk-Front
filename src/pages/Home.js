@@ -1,7 +1,7 @@
 import React from "react";
 import GoldButton from "../components/GoldButton";
 import "./Home.css";
-import Video from "../assets/video/video.mp4";
+import Video from "../assets/video/videos.mp4";
 
 const Home = () => {
   return (
