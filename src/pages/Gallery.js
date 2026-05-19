@@ -266,6 +266,7 @@ const Gallery = () => {
                 src={selectedVideo.url}
                 controls
                 autoPlay
+                muted
                 className="lightbox-video"
               />
               <div className="lightbox-caption">
