@@ -1,78 +1,116 @@
 import React, { useState, useEffect } from "react";
 import "./Gallery.css";
-import heartCornrows from "../assets/heartcornrows.png";
 
 const Gallery = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
   const [activeCategory, setActiveCategory] = useState("all");
-  const [filteredImages, setFilteredImages] = useState([]);
+  const [filteredVideos, setFilteredVideos] = useState([]);
 
-  // Full image collection with categories
-  const allImages = [
-    { id: 1, url: heartCornrows, title: "Heart Cornrows", category: "cornrows" },
-    { id: 2, url: "https://images.unsplash.com/photo-1582095133179-bfd08f2fc215?w=600", title: "Modern Cut", category: "color" },
-    { id: 3, url: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600", title: "Color Transformation", category: "color" },
-    { id: 4, url: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600", title: "Bridal Style", category: "bridal" },
-    { id: 5, url: "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600", title: "Luxury Styling", category: "color" },
-    { id: 6, url: "https://images.unsplash.com/photo-1582095133179-bfd08f2fc215?w=600", title: "Texture & Volume", category: "color" },
-    { id: 7, url: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600", title: "Golden Highlights", category: "color" },
-    { id: 8, url: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600", title: "Sleek & Smooth", category: "bridal" },
-    // Additional images for other categories
-    { id: 9, url: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600", title: "Classic Cornrows", category: "cornrows" },
-    { id: 10, url: "https://images.unsplash.com/photo-1588702547919-26089e3ace6c?w=600", title: "Twisted Updo", category: "twists" },
-    { id: 11, url: "https://images.unsplash.com/photo-1594849543504-bf2f3e3e0e2a?w=600", title: "Faux Locs", category: "locs" },
-    { id: 12, url: "https://images.unsplash.com/photo-1503443207922-dff7d543fd0e?w=600", title: "Bridal Bun", category: "bridal" },
+  // Sample video collection (replace with your own MP4/YouTube URLs)
+  const allVideos = [
+    {
+      id: 1,
+      url: "https://assets.mixkit.co/videos/preview/mixkit-hairdresser-cutting-hair-32157-large.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hairdresser-cutting-hair-32157-large.jpg",
+      title: "Haircut & Style",
+      category: "cornrows"
+    },
+    {
+      id: 2,
+      url: "https://assets.mixkit.co/videos/preview/mixkit-woman-dying-her-hair-32182-large.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-woman-dying-her-hair-32182-large.jpg",
+      title: "Color Transformation",
+      category: "color"
+    },
+    {
+      id: 3,
+      url: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hair-stylist-braiding-hair-32185-large.jpg",
+      title: "Braiding Artistry",
+      category: "cornrows"
+    },
+    {
+      id: 4,
+      url: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "Bridal Elegance",
+      category: "bridal"
+    },
+    {
+      id: 5,
+      url: "https://assets.mixkit.co/videos/preview/mixkit-woman-styling-her-hair-32189-large.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-woman-styling-her-hair-32189-large.jpg",
+      title: "Everyday Glam",
+      category: "color"
+    },
+    {
+      id: 6,
+      url: "https://assets.mixkit.co/videos/preview/mixkit-hairdresser-using-scissors-32192-large.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hairdresser-using-scissors-32192-large.jpg",
+      title: "Precision Cut",
+      category: "color"
+    },
+    {
+      id: 7,
+      url: "https://assets.mixkit.co/videos/preview/mixkit-woman-getting-her-hair-curled-32194-large.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-woman-getting-her-hair-curled-32194-large.jpg",
+      title: "Curling Magic",
+      category: "bridal"
+    },
+    {
+      id: 8,
+      url: "https://assets.mixkit.co/videos/preview/mixkit-young-woman-brushing-her-hair-32195-large.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-young-woman-brushing-her-hair-32195-large.jpg",
+      title: "Silky Smooth",
+      category: "color"
+    }
   ];
 
-  // Update filtered images when category changes
+  // Category filter logic (same as before)
   useEffect(() => {
     if (activeCategory === "all") {
-      setFilteredImages(allImages);
+      setFilteredVideos(allVideos);
     } else {
-      setFilteredImages(allImages.filter(img => img.category === activeCategory));
+      setFilteredVideos(allVideos.filter(v => v.category === activeCategory));
     }
   }, [activeCategory]);
 
-  // Category mapping for display
   const categories = [
     { key: "all", label: "All Work", icon: "✨" },
     { key: "cornrows", label: "Cornrows & Braids", icon: "🔲" },
-    { key: "twists", label: "Twists", icon: "🌀" },
-    { key: "locs", label: "Locs", icon: "🌿" },
     { key: "bridal", label: "Bridal", icon: "💍" },
     { key: "color", label: "Color & Style", icon: "🎨" }
   ];
 
-  // Handle lightbox navigation
-  const currentIndex = filteredImages.findIndex(img => img.id === selectedImage?.id);
-  const nextImage = () => {
-    const next = (currentIndex + 1) % filteredImages.length;
-    setSelectedImage(filteredImages[next]);
+  // Lightbox navigation
+  const currentIndex = filteredVideos.findIndex(v => v.id === selectedVideo?.id);
+  const nextVideo = () => {
+    const next = (currentIndex + 1) % filteredVideos.length;
+    setSelectedVideo(filteredVideos[next]);
   };
-  const prevImage = () => {
-    const prev = (currentIndex - 1 + filteredImages.length) % filteredImages.length;
-    setSelectedImage(filteredImages[prev]);
+  const prevVideo = () => {
+    const prev = (currentIndex - 1 + filteredVideos.length) % filteredVideos.length;
+    setSelectedVideo(filteredVideos[prev]);
   };
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (!selectedImage) return;
-      if (e.key === "ArrowRight") nextImage();
-      if (e.key === "ArrowLeft") prevImage();
-      if (e.key === "Escape") setSelectedImage(null);
+      if (!selectedVideo) return;
+      if (e.key === "ArrowRight") nextVideo();
+      if (e.key === "ArrowLeft") prevVideo();
+      if (e.key === "Escape") setSelectedVideo(null);
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedImage, currentIndex]);
+  }, [selectedVideo, currentIndex]);
 
   return (
     <div className="gallery-page">
       <div className="gallery-header">
         <h1>
-          The <span className="gold-text">Gallery</span>
+          The <span className="gold-text">Video Gallery</span>
         </h1>
-        <p className="gallery-subtitle">A showcase of our finest work – every style tells a story</p>
+        <p className="gallery-subtitle">Watch our artistry in motion – every style tells a story</p>
       </div>
 
       {/* Category filters */}
@@ -91,41 +129,47 @@ const Gallery = () => {
 
       {/* Masonry grid */}
       <div className="gallery-grid">
-        {filteredImages.map((image) => (
+        {filteredVideos.map((video) => (
           <div
-            key={image.id}
+            key={video.id}
             className="gallery-item"
-            onClick={() => setSelectedImage(image)}
+            onClick={() => setSelectedVideo(video)}
           >
-            <img src={image.url} alt={image.title} loading="lazy" />
+            <img src={video.poster} alt={video.title} loading="lazy" />
             <div className="gallery-overlay">
-              <h3>{image.title}</h3>
-              <span className="view-icon">
-                <i className="fa-solid fa-magnifying-glass"></i>
+              <h3>{video.title}</h3>
+              <span className="play-icon">
+                <i className="fa-solid fa-play"></i>
               </span>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Lightbox */}
-      {selectedImage && (
-        <div className="lightbox" onClick={() => setSelectedImage(null)}>
+      {/* Lightbox video player */}
+      {selectedVideo && (
+        <div className="lightbox" onClick={() => setSelectedVideo(null)}>
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <button className="lightbox-close" onClick={() => setSelectedImage(null)}>✕</button>
-            <button className="lightbox-prev" onClick={prevImage}>‹</button>
-            <div className="lightbox-image-container">
-              <img src={selectedImage.url} alt={selectedImage.title} />
+            <button className="lightbox-close" onClick={() => setSelectedVideo(null)}>✕</button>
+            <button className="lightbox-prev" onClick={prevVideo}>‹</button>
+            <div className="lightbox-video-container">
+              <video
+                src={selectedVideo.url}
+                poster={selectedVideo.poster}
+                controls
+                autoPlay
+                className="lightbox-video"
+              />
               <div className="lightbox-caption">
-                <h3>{selectedImage.title}</h3>
+                <h3>{selectedVideo.title}</h3>
                 <p className="category-badge">
-                  {categories.find(c => c.key === selectedImage.category)?.label || "Style"}
+                  {categories.find(c => c.key === selectedVideo.category)?.label || "Style"}
                 </p>
               </div>
             </div>
-            <button className="lightbox-next" onClick={nextImage}>›</button>
+            <button className="lightbox-next" onClick={nextVideo}>›</button>
             <div className="lightbox-counter">
-              {currentIndex + 1} / {filteredImages.length}
+              {currentIndex + 1} / {filteredVideos.length}
             </div>
           </div>
         </div>

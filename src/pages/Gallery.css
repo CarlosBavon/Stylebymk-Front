@@ -104,7 +104,7 @@
   transform: scale(1.1);
 }
 
-/* Masonry grid using CSS columns (classic masonry look) */
+/* Masonry grid using CSS columns */
 .gallery-grid {
   column-count: 4;
   column-gap: 1.2rem;
@@ -168,19 +168,25 @@
   text-shadow: 0 1px 2px black;
 }
 
-.view-icon {
-  background: rgba(212, 175, 55, 0.8);
+/* Play icon (replaces the old view-icon) */
+.play-icon {
+  background: rgba(212, 175, 55, 0.9);
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   color: #000;
+  transition: transform 0.2s;
 }
 
-/* Lightbox enhancements */
+.gallery-item:hover .play-icon {
+  transform: scale(1.1);
+}
+
+/* Lightbox overlay */
 .lightbox {
   position: fixed;
   top: 0;
@@ -198,25 +204,25 @@
 
 .lightbox-content {
   position: relative;
-  max-width: 85vw;
-  max-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.lightbox-image-container {
-  max-height: 80vh;
-  overflow: hidden;
+/* Video container (instead of image container) */
+.lightbox-video-container {
+  max-width: 85vw;
+  max-height: 85vh;
   border-radius: 12px;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
   border: 2px solid rgba(212, 175, 55, 0.6);
+  background: #000;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
 }
 
-.lightbox-image-container img {
-  max-height: 75vh;
-  max-width: 85vw;
-  object-fit: contain;
+.lightbox-video {
+  width: 100%;
+  max-height: 80vh;
   display: block;
 }
 
@@ -247,6 +253,7 @@
   margin-top: 4px;
 }
 
+/* Navigation buttons (prev/next/close) */
 .lightbox-close,
 .lightbox-prev,
 .lightbox-next {
@@ -263,6 +270,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
 
 .lightbox-close {
@@ -301,7 +309,7 @@
   color: #d4af37;
 }
 
-/* Responsive: fewer columns on smaller screens */
+/* Responsive adjustments */
 @media (max-width: 1024px) {
   .gallery-grid {
     column-count: 3;
@@ -323,6 +331,18 @@
     width: 36px;
     height: 36px;
     font-size: 1.4rem;
+  }
+  .lightbox-video-container {
+    max-width: 95vw;
+    max-height: 70vh;
+  }
+  .lightbox-video {
+    max-height: 65vh;
+  }
+  .lightbox-caption {
+    bottom: -50px;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
   }
 }
 
