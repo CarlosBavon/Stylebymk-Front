@@ -1,14 +1,14 @@
 import React from "react";
 import GoldButton from "../components/GoldButton";
 import "./Home.css";
-import Video from "../assets/video/video.mp4";
+
 
 const Home = () => {
   return (
     <div className="home-container">
       <div className="video-background">
         <video autoPlay loop muted playsInline>
-          <source src={Video} type="video/mp4" />
+          <source src="https://player.cloudinary.com/embed/?cloud_name=dbaqo3rql&public_id=Recording_2026-05-19_184843_online-video-cutter.com_1_ymnqdw" type="video/mp4" />
         </video>
         <div className="video-overlay"></div>
       </div>
