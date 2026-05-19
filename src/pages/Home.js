@@ -8,7 +8,7 @@ const Home = () => {
     <div className="home-container">
       <div className="video-background">
         <video autoPlay loop muted playsInline>
-          <source src="https://player.cloudinary.com/embed/?cloud_name=dbaqo3rql&public_id=Recording_2026-05-19_184843_online-video-cutter.com_1_ymnqdw" type="video/mp4" />
+          <source src="https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226515/Recording_2026-05-19_184843_online-video-cutter.com_1_u7hpvh.mp4" type="video/mp4" />
         </video>
         <div className="video-overlay"></div>
       </div>
