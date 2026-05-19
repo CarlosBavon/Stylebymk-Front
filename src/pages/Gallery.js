@@ -262,7 +262,7 @@ const Gallery = () => {
   const categories = [
     { key: "all", label: "All Work", icon: "✨" },
     { key: "cornrows", label: "Cornrows & Braids", icon: "🔲" },
-    { key: "twists", label: "Twists", icon: "💍" },
+    { key: "twists", label: "TwistOuts", icon: "💍" },
     { key: "color", label: "Color & Style", icon: "🎨" }
   ];
 
