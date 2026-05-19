@@ -17,10 +17,10 @@ const Gallery = () => {
     },
     {
       id: 2,
-      url: "https://assets.mixkit.co/videos/preview/mixkit-woman-dying-her-hair-32182-large.mp4",
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779229561/Screen_Recording_2026-05-20_012453_kssjwv.mp4",
       poster: "https://assets.mixkit.co/videos/preview/mixkit-woman-dying-her-hair-32182-large.jpg",
-      title: "Color Transformation",
-      category: "color"
+      title: "Twist Sculpting",
+      category: "barrel"
     },
     {
       id: 3,
@@ -38,17 +38,17 @@ const Gallery = () => {
     },
     {
       id: 5,
-      url: "https://assets.mixkit.co/videos/preview/mixkit-woman-styling-her-hair-32189-large.mp4",
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779229558/Screen_Recording_2026-05-20_012414_azuqeh.mp4",
       poster: "https://assets.mixkit.co/videos/preview/mixkit-woman-styling-her-hair-32189-large.jpg",
       title: "Everyday Glam",
-      category: "color"
+      category: "barrel"
     },
     {
       id: 6,
-      url: "https://assets.mixkit.co/videos/preview/mixkit-hairdresser-using-scissors-32192-large.mp4",
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779229556/Screen_Recording_2026-05-20_012250_abfhcq.mp4",
       poster: "https://assets.mixkit.co/videos/preview/mixkit-hairdresser-using-scissors-32192-large.jpg",
-      title: "Precision Cut",
-      category: "color"
+      title: "Twist Sculpting",
+      category: "barrel"
     },
     {
       id: 7,
@@ -59,10 +59,10 @@ const Gallery = () => {
     },
     {
       id: 8,
-      url: "https://assets.mixkit.co/videos/preview/mixkit-young-woman-brushing-her-hair-32195-large.mp4",
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779229553/Screen_Recording_2026-05-20_012140_y3imeb.mp4",
       poster: "https://assets.mixkit.co/videos/preview/mixkit-young-woman-brushing-her-hair-32195-large.jpg",
       title: "Silky Smooth",
-      category: "color"
+      category: "barrel"
     },
     {
       id: 9,
@@ -248,6 +248,27 @@ const Gallery = () => {
       title: "TwistOuts",
       category: "twists"
     },
+    {
+      id: 35,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779229551/Screen_Recording_2026-05-20_012051_y5wm4i.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-hairdresser-using-scissors-32192-large.jpg",
+      title: "Twist Sculpting",
+      category: "barrel"
+    },
+    {
+      id: 34,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779229551/Screen_Recording_2026-05-20_011938_iotbgi.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
+    {
+      id: 34,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779229549/Screen_Recording_2026-05-20_011747_lwmit7.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
   ];
 
   // Category filter logic (same as before)
@@ -260,10 +281,10 @@ const Gallery = () => {
   }, [activeCategory]);
 
   const categories = [
-    { key: "all", label: "All Work", icon: "✨" },
-    { key: "cornrows", label: "Cornrows & Braids", icon: "🔲" },
-    { key: "twists", label: "TwistOuts", icon: "💍" },
-    { key: "color", label: "Color & Style", icon: "🎨" }
+    { key: "all", label: "All Work" },
+    { key: "cornrows", label: "Cornrows & Braids" },
+    { key: "twists", label: "TwistOuts" },
+    { key: "barrel", label: "Barrel twists" }
   ];
 
   const currentIndex = filteredVideos.findIndex(v => v.id === selectedVideo?.id);
