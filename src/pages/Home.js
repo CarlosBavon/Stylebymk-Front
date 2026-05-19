@@ -8,7 +8,7 @@ const Home = () => {
     <div className="home-container">
       <div className="video-background">
         <video autoPlay loop muted playsInline>
-          <source src={Video} type="video/mp4" />
+          <source src={Video} type="videos/mp4" />
         </video>
         <div className="video-overlay"></div>
       </div>
