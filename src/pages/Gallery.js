@@ -12,7 +12,7 @@ const Gallery = () => {
       id: 1,
       url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226897/Screen_Recording_2026-05-19_185532_lywhoy.mp4",
       poster: "https://assets.mixkit.co/videos/preview/mixkit-hairdresser-cutting-hair-32157-large.jpg",
-      title: "Haircut & Style",
+      title: "Braiding Artistry",
       category: "cornrows"
     },
     {
@@ -31,10 +31,10 @@ const Gallery = () => {
     },
     {
       id: 4,
-      url: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.mp4",
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226920/Screen_Recording_2026-05-19_192647_zfii7z.mp4",
       poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
-      title: "Bridal Elegance",
-      category: "bridal"
+      title: "TwistOuts",
+      category: "twists"
     },
     {
       id: 5,
@@ -52,10 +52,10 @@ const Gallery = () => {
     },
     {
       id: 7,
-      url: "https://assets.mixkit.co/videos/preview/mixkit-woman-getting-her-hair-curled-32194-large.mp4",
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226917/Screen_Recording_2026-05-19_192142_sofnqy.mp4",
       poster: "https://assets.mixkit.co/videos/preview/mixkit-woman-getting-her-hair-curled-32194-large.jpg",
       title: "Curling Magic",
-      category: "bridal"
+      category: "twists"
     },
     {
       id: 8,
@@ -169,6 +169,85 @@ const Gallery = () => {
       title: "Braiding Artistry",
       category: "cornrows"
     },
+
+
+    {
+      id: 24,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226917/Screen_Recording_2026-05-19_192240_ydg2nr.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
+    {
+      id: 25,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226917/Screen_Recording_2026-05-19_192329_p6u4un.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
+    {
+      id: 26,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226917/Screen_Recording_2026-05-19_192454_jc2l6j.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
+    {
+      id: 27,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226914/Screen_Recording_2026-05-19_192046_ilcutg.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
+    {
+      id: 28,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226913/Screen_Recording_2026-05-19_191956_tykgje.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
+    {
+      id: 29,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226912/Screen_Recording_2026-05-19_191818_zfprcp.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
+    {
+      id: 30,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226911/Screen_Recording_2026-05-19_191858_tqdmfn.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
+    {
+      id: 31,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226909/Screen_Recording_2026-05-19_191622_guol5g.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
+    {
+      id: 32,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226899/Screen_Recording_2026-05-19_185701_i7rnsh.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
+    {
+      id: 33,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226897/Screen_Recording_2026-05-19_185357_n4xfzm.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
+    {
+      id: 34,
+      url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226896/Screen_Recording_2026-05-19_184431_rs4e3f.mp4",
+      poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
+      title: "TwistOuts",
+      category: "twists"
+    },
   ];
 
   // Category filter logic (same as before)
@@ -183,7 +262,7 @@ const Gallery = () => {
   const categories = [
     { key: "all", label: "All Work", icon: "✨" },
     { key: "cornrows", label: "Cornrows & Braids", icon: "🔲" },
-    { key: "bridal", label: "Bridal", icon: "💍" },
+    { key: "twists", label: "Twists", icon: "💍" },
     { key: "color", label: "Color & Style", icon: "🎨" }
   ];
 
