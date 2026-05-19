@@ -362,3 +362,17 @@
     transform: scale(1);
   }
 }
+
+/* Add this to Gallery.css – replace the img styles with video thumbnail */
+.gallery-thumbnail {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+  object-fit: cover;
+  aspect-ratio: 16 / 9; /* optional, keeps consistent aspect ratio */
+}
+
+.gallery-item:hover .gallery-thumbnail {
+  transform: scale(1.05);
+}

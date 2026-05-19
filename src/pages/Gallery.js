@@ -187,7 +187,6 @@ const Gallery = () => {
     { key: "color", label: "Color & Style", icon: "🎨" }
   ];
 
-  // Lightbox navigation
   const currentIndex = filteredVideos.findIndex(v => v.id === selectedVideo?.id);
   const nextVideo = () => {
     const next = (currentIndex + 1) % filteredVideos.length;
@@ -218,7 +217,6 @@ const Gallery = () => {
         <p className="gallery-subtitle">Watch our artistry in motion – every style tells a story</p>
       </div>
 
-      {/* Category filters */}
       <div className="gallery-filters">
         {categories.map(cat => (
           <button
@@ -232,7 +230,6 @@ const Gallery = () => {
         ))}
       </div>
 
-      {/* Masonry grid */}
       <div className="gallery-grid">
         {filteredVideos.map((video) => (
           <div
@@ -240,7 +237,14 @@ const Gallery = () => {
             className="gallery-item"
             onClick={() => setSelectedVideo(video)}
           >
-            <img src={video.poster} alt={video.title} loading="lazy" />
+            {/* Video thumbnail (muted, loop, shows first frame) */}
+            <video
+              src={video.url}
+              muted
+              loop
+              playsInline
+              className="gallery-thumbnail"
+            />
             <div className="gallery-overlay">
               <h3>{video.title}</h3>
               <span className="play-icon">
@@ -260,7 +264,6 @@ const Gallery = () => {
             <div className="lightbox-video-container">
               <video
                 src={selectedVideo.url}
-                poster={selectedVideo.poster}
                 controls
                 autoPlay
                 className="lightbox-video"
