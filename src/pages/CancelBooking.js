@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import GoldButton from "../components/GoldButton";
 import "./CancelBooking.css";
+import { Helmet } from 'react-helmet-async';
 
 const CancelBooking = () => {
   const location = useLocation();
@@ -45,42 +46,49 @@ const CancelBooking = () => {
   };
 
   return (
-    <div className="cancel-page">
-      <div className="cancel-container">
-        <h1>
-          Cancel <span className="gold-text">Booking</span>
-        </h1>
-        <p>Enter your booking code and email address</p>
-        <form onSubmit={handleCancel}>
-          <div className="form-group">
-            <label>Booking Code</label>
-            <input
-              type="text"
-              name="bookingCode"
-              value={formData.bookingCode}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Email Address</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <GoldButton type="submit" disabled={loading}>
-            {loading ? "Cancelling..." : "Cancel Booking"}
-          </GoldButton>
-          {message && (
-            <div className={`message ${message.type}`}>{message.text}</div>
-          )}
-        </form>
+    <>
+      <Helmet>
+        <title>StylesbyMK – Premium Hair Studio | Braids, Twists, Locs in Nairobi</title>
+        <meta name="description" content="Experience the art of hair design at StylesbyMK. Book your session for cornrows, twists, barrel twists, locs and more. Premium quality, gold‑standard service." />
+        <link rel="canonical" href="https://stylesbymk.vercel.app/" />
+      </Helmet>
+      <div className="cancel-page">
+        <div className="cancel-container">
+          <h1>
+            Cancel <span className="gold-text">Booking</span>
+          </h1>
+          <p>Enter your booking code and email address</p>
+          <form onSubmit={handleCancel}>
+            <div className="form-group">
+              <label>Booking Code</label>
+              <input
+                type="text"
+                name="bookingCode"
+                value={formData.bookingCode}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Email Address</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <GoldButton type="submit" disabled={loading}>
+              {loading ? "Cancelling..." : "Cancel Booking"}
+            </GoldButton>
+            {message && (
+              <div className={`message ${message.type}`}>{message.text}</div>
+            )}
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

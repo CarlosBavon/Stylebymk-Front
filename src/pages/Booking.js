@@ -6,6 +6,7 @@ import { createBooking } from "../api";
 import axios from "axios";
 import "./Booking.css";
 import { Link } from "react-router-dom";
+import { Helmet } from 'react-helmet-async';
 
 // Helper: get local YYYY-MM-DD from a Date object (no timezone shift)
 const getLocalDateString = (date) => {
@@ -172,122 +173,129 @@ const Booking = () => {
   minSelectableDate.setDate(minSelectableDate.getDate() + 1);
 
   return (
-    <div className="booking-page">
-      <div className="booking-header">
-        <h1>
-          Book Your <span className="gold-text">Hairstyle</span>
-        </h1>
-        <p>Reserve your spot for a transformative hairstyling session</p>
-      </div>
+    <>
+      <Helmet>
+        <title>StylesbyMK – Premium Hair Studio | Braids, Twists, Locs in Nairobi</title>
+        <meta name="description" content="Experience the art of hair design at StylesbyMK. Book your session for cornrows, twists, barrel twists, locs and more. Premium quality, gold‑standard service." />
+        <link rel="canonical" href="https://stylesbymk.vercel.app/" />
+      </Helmet>
+      <div className="booking-page">
+        <div className="booking-header">
+          <h1>
+            Book Your <span className="gold-text">Hairstyle</span>
+          </h1>
+          <p>Reserve your spot for a transformative hairstyling session</p>
+        </div>
 
-      <div className="booking-form-container">
-        <form onSubmit={handleSubmit} className="booking-form">
-          <div className="form-group">
-            <label>Full Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <div className="booking-form-container">
+          <form onSubmit={handleSubmit} className="booking-form">
+            <div className="form-group">
+              <label>Full Name</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-          <div className="form-group">
-            <label>Email Address</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
+            <div className="form-group">
+              <label>Email Address</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-          <div className="form-group">
-            <label>Phone Number</label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-          </div>
+            <div className="form-group">
+              <label>Phone Number</label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-          <div className="form-group">
-            <label>Select Date</label>
-            <DatePicker
-              selected={formData.date}
-              onChange={handleDateChange}
-              minDate={minSelectableDate}
-              className="date-picker"
-              required
-            />
-          </div>
+            <div className="form-group">
+              <label>Select Date</label>
+              <DatePicker
+                selected={formData.date}
+                onChange={handleDateChange}
+                minDate={minSelectableDate}
+                className="date-picker"
+                required
+              />
+            </div>
 
-          <div className="form-group">
-            <label>Select Time</label>
-            {fetchingSlots ? (
-              <p style={{ color: "#D4AF37" }}>Loading available times...</p>
-            ) : (
-              <div className="time-slots">
-                {availableTimes.length === 0 ? (
-                  <p style={{ color: "#ff6b6b" }}>
-                    No available slots for this date. Please choose another day.
-                  </p>
-                ) : (
-                  <div className="time-buttons">
-                    {availableTimes.map((time) => (
-                      <button
-                        key={time}
-                        type="button"
-                        className={`time-slot-btn ${formData.time === time ? "selected" : ""}`}
-                        onClick={() => setFormData({ ...formData, time })}
-                      >
-                        {time}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
+            <div className="form-group">
+              <label>Select Time</label>
+              {fetchingSlots ? (
+                <p style={{ color: "#D4AF37" }}>Loading available times...</p>
+              ) : (
+                <div className="time-slots">
+                  {availableTimes.length === 0 ? (
+                    <p style={{ color: "#ff6b6b" }}>
+                      No available slots for this date. Please choose another day.
+                    </p>
+                  ) : (
+                    <div className="time-buttons">
+                      {availableTimes.map((time) => (
+                        <button
+                          key={time}
+                          type="button"
+                          className={`time-slot-btn ${formData.time === time ? "selected" : ""}`}
+                          onClick={() => setFormData({ ...formData, time })}
+                        >
+                          {time}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
 
-          <div className="form-group">
-            <label>Select Hairstyle</label>
-            <select
-              name="service"
-              value={formData.service}
-              onChange={handleChange}
-              required
+            <div className="form-group">
+              <label>Select Hairstyle</label>
+              <select
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+                required
+              >
+                {services.map((service) => (
+                  <option key={service} value={service}>
+                    {service}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <GoldButton
+              type="submit"
+              disabled={loading || !formData.time || fetchingSlots}
             >
-              {services.map((service) => (
-                <option key={service} value={service}>
-                  {service}
-                </option>
-              ))}
-            </select>
-          </div>
+              {loading ? "Processing..." : "Confirm Booking "}
+            </GoldButton>
+            <li className="cancel">
+              <Link to="/cancel" className="cancel-link">
+                Cancel Booking ✕
+              </Link>
+            </li>
 
-          <GoldButton
-            type="submit"
-            disabled={loading || !formData.time || fetchingSlots}
-          >
-            {loading ? "Processing..." : "Confirm Booking "}
-          </GoldButton>
-          <li className="cancel">
-            <Link to="/cancel" className="cancel-link">
-              Cancel Booking ✕
-            </Link>
-          </li>
-
-          {message && (
-            <div className={`message ${message.type}`}>{message.text}</div>
-          )}
-        </form>
+            {message && (
+              <div className={`message ${message.type}`}>{message.text}</div>
+            )}
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

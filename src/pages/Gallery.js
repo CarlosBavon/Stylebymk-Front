@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Gallery.css";
+import { Helmet } from 'react-helmet-async';
 
 const Gallery = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -85,81 +86,88 @@ const Gallery = () => {
   }, [selectedVideo, currentIndex]);
 
   return (
-    <div className="gallery-page">
-      <div className="gallery-header">
-        <h1>
-          The <span className="gold-text">Video Gallery</span>
-        </h1>
-        <p className="gallery-subtitle">Watch our artistry in motion – every style tells a story</p>
-      </div>
+    <>
+      <Helmet>
+        <title>StylesbyMK – Premium Hair Studio | Braids, Twists, Locs in Nairobi</title>
+        <meta name="description" content="Experience the art of hair design at StylesbyMK. Book your session for cornrows, twists, barrel twists, locs and more. Premium quality, gold‑standard service." />
+        <link rel="canonical" href="https://stylesbymk.vercel.app/" />
+      </Helmet>
+      <div className="gallery-page">
+        <div className="gallery-header">
+          <h1>
+            The <span className="gold-text">Video Gallery</span>
+          </h1>
+          <p className="gallery-subtitle">Watch our artistry in motion – every style tells a story</p>
+        </div>
 
-      <div className="gallery-filters">
-        {categories.map(cat => (
-          <button
-            key={cat.key}
-            className={`filter-btn ${activeCategory === cat.key ? "active" : ""}`}
-            onClick={() => setActiveCategory(cat.key)}
-          >
-            <span className="filter-icon">{cat.icon}</span>
-            <span className="filter-label">{cat.label}</span>
-          </button>
-        ))}
-      </div>
+        <div className="gallery-filters">
+          {categories.map(cat => (
+            <button
+              key={cat.key}
+              className={`filter-btn ${activeCategory === cat.key ? "active" : ""}`}
+              onClick={() => setActiveCategory(cat.key)}
+            >
+              <span className="filter-icon">{cat.icon}</span>
+              <span className="filter-label">{cat.label}</span>
+            </button>
+          ))}
+        </div>
 
-      <div className="gallery-grid">
-        {filteredVideos.map((video) => (
-          <div
-            key={video.id}
-            className="gallery-item"
-            onClick={() => setSelectedVideo(video)}
-          >
-            {/* Video thumbnail (muted, loop, shows first frame) */}
-            <video
-              src={video.url}
-              muted
-              loop
-              playsInline
-              className="gallery-thumbnail"
-            />
-            <div className="gallery-overlay">
-              <h3>{video.title}</h3>
-              <span className="play-icon">
-                <i className="fa-solid fa-play"></i>
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Lightbox video player */}
-      {selectedVideo && (
-        <div className="lightbox" onClick={() => setSelectedVideo(null)}>
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <button className="lightbox-close" onClick={() => setSelectedVideo(null)}>✕</button>
-            <button className="lightbox-prev" onClick={prevVideo}>‹</button>
-            <div className="lightbox-video-container">
+        <div className="gallery-grid">
+          {filteredVideos.map((video) => (
+            <div
+              key={video.id}
+              className="gallery-item"
+              onClick={() => setSelectedVideo(video)}
+            >
+              {/* Video thumbnail (muted, loop, shows first frame) */}
               <video
-                src={selectedVideo.url}
-                controls
-                autoPlay
+                src={video.url}
                 muted
-                className="lightbox-video"
+                loop
+                playsInline
+                className="gallery-thumbnail"
               />
-              <div className="lightbox-caption">
-                <h3>{selectedVideo.title}</h3>
-                <p className="category-badge">
-                  {categories.find(c => c.key === selectedVideo.category)?.label || "Style"}
-                </p>
+              <div className="gallery-overlay">
+                <h3>{video.title}</h3>
+                <span className="play-icon">
+                  <i className="fa-solid fa-play"></i>
+                </span>
               </div>
             </div>
-            <button className="lightbox-next" onClick={nextVideo}>›</button>
-            <div className="lightbox-counter">
-              {currentIndex + 1} / {filteredVideos.length}
+          ))}
+        </div>
+
+        {/* Lightbox video player */}
+        {selectedVideo && (
+          <div className="lightbox" onClick={() => setSelectedVideo(null)}>
+            <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+              <button className="lightbox-close" onClick={() => setSelectedVideo(null)}>✕</button>
+              <button className="lightbox-prev" onClick={prevVideo}>‹</button>
+              <div className="lightbox-video-container">
+                <video
+                  src={selectedVideo.url}
+                  controls
+                  autoPlay
+                  muted
+                  className="lightbox-video"
+                />
+                <div className="lightbox-caption">
+                  <h3>{selectedVideo.title}</h3>
+                  <p className="category-badge">
+                    {categories.find(c => c.key === selectedVideo.category)?.label || "Style"}
+                  </p>
+                </div>
+              </div>
+              <button className="lightbox-next" onClick={nextVideo}>›</button>
+              <div className="lightbox-counter">
+                {currentIndex + 1} / {filteredVideos.length}
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 
