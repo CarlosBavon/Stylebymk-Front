@@ -1,8 +1,8 @@
 import React from 'react';
 import './GoldButton.css';
 
-const GoldButton = ({ children, onClick, to, type = 'button' }) => {
-  const buttonClass = 'gold-button';
+const GoldButton = ({ children, onClick, to, type = 'button', variant = 'solid' }) => {
+  const buttonClass = `gold-button ${variant === 'outline' ? 'gold-button-outline' : ''}`;
   
   if (to) {
     return (

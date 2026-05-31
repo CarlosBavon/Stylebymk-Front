@@ -3,11 +3,14 @@
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(10px);
+  background: transparent;
   z-index: 1000;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 .nav-container {
@@ -22,10 +25,9 @@
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 5px;
   text-decoration: none;
   font-family: "Cinzel", serif;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 700;
   position: relative;
   transition: transform 0.3s ease;
@@ -49,6 +51,7 @@
   display: flex;
   gap: 2rem;
   align-items: center;
+  margin: 0 auto;
 }
 
 .nav-link {
@@ -93,6 +96,33 @@
   transition: width 0.3s ease;
 }
 
+/* Desktop book‑now button */
+.desktop-book-btn {
+  background: linear-gradient(135deg, #d4af37, #ffd700);
+  color: #000;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.desktop-book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+/* Mobile book‑now button – hidden on desktop */
+.mobile-book-btn {
+  display: none;
+}
+
+/* Hamburger toggle */
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -107,6 +137,7 @@
   transition: 0.3s;
 }
 
+/* Responsive styles */
 @media (max-width: 768px) {
   .nav-toggle {
     display: flex;
@@ -117,6 +148,12 @@
     font-weight: 700;
   }
 
+  /* Hide desktop button */
+  .desktop-book-btn {
+    display: none;
+  }
+
+  /* Mobile menu drawer */
   .nav-menu {
     position: fixed;
     left: -100%;
@@ -129,12 +166,25 @@
     padding: 2rem 0;
     gap: 1.5rem;
     backdrop-filter: blur(10px);
+    margin: 0; /* remove centering on mobile */
   }
 
   .nav-menu.active {
     left: 0;
   }
 
+  /* Show mobile button inside the drawer */
+  .mobile-book-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #d4af37, #ffd700);
+    color: #000;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 0.5rem;
+  }
+
+  /* Hamburger animation */
   .bar.active:nth-child(1) {
     transform: rotate(45deg) translate(8px, 6px);
   }
@@ -148,6 +198,7 @@
   }
 }
 
+/* Profile image styles */
 .profile-img {
   width: 60px;
   height: 60px;

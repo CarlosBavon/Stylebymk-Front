@@ -1,7 +1,7 @@
 .home-container {
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
 }
 
@@ -10,13 +10,13 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   z-index: 0;
 }
 
 .video-background video {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   object-fit: cover;
 }
 
@@ -37,38 +37,38 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 100vh;
   text-align: center;
   padding: 0 2rem;
+  border-bottom: 2px solid #d4af37;
 }
 
 .main-title {
-  font-size: 6rem;
   font-weight: 900;
-  margin-bottom: 1rem;
-  letter-spacing: 4px;
+  margin-bottom: 2rem;
 }
 
 @media (min-width: 768px) {
   .main-title {
-    font-size: 8rem;
+    font-size: 3rem;
   }
 }
 
 @media (min-width: 1024px) {
   .main-title {
-    font-size: 10rem;
+    font-size: 5rem;
   }
 }
 
 .main-title span:first-child {
-  color: #D4AF37;
+  color: #d4af37;
   text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
   animation: pulseGold 2s ease-in-out infinite;
 }
 
 @keyframes pulseGold {
-  0%, 100% {
+  0%,
+  100% {
     text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
   }
   50% {
@@ -77,8 +77,8 @@
 }
 
 .subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+  font-size: 1rem;
+  margin-bottom: 3rem;
   color: #ddd;
   letter-spacing: 2px;
 }
@@ -92,30 +92,30 @@
 
 .scroll-indicator {
   position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
+  bottom: 5rem;
+  right: 0.5rem;
+  text-align: right;
+  cursor: pointer;
 }
 
 .mouse {
   width: 30px;
   height: 50px;
-  border: 2px solid #D4AF37;
+  border: 2px solid #d4af37;
   border-radius: 15px;
   position: relative;
   margin: 0 auto 10px;
 }
 
 .mouse::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 8px;
   left: 50%;
   transform: translateX(-50%);
   width: 4px;
   height: 8px;
-  background: #D4AF37;
+  background: #d4af37;
   border-radius: 2px;
   animation: scrollWheel 2s infinite;
 }
@@ -133,5 +133,279 @@
 
 .scroll-indicator p {
   font-size: 0.8rem;
-  color: #D4AF37;
+  color: #d4af37;
+}
+
+.establishment-badge {
+  font-family: "Cinzel", serif;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  color: #d4af37;
+  margin-top: 3rem;
+  text-transform: uppercase;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+.establishment-badge .dash {
+  margin: 0 0.25rem;
+  color: #d4af37;
+}
+.establishment-badge .separator {
+  color: white;
+  font-weight: bold;
+}
+
+/* Stats section */
+.stats-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.stat-card {
+  background: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  min-width: 160px;
+  transition:
+    transform 0.3s,
+    border-color 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: #d4af37;
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+}
+
+.stat-number {
+  font-family: "Cinzel", serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #d4af37;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .stat-number {
+    font-size: 2.5rem;
+  }
+  .stat-label {
+    font-size: 0.9rem;
+  }
+  .stat-card {
+    padding: 2rem 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-container {
+    gap: 1rem;
+  }
+  .stat-card {
+    padding: 1rem 1.2rem;
+    min-width: 110px;
+  }
+  .stat-number {
+    font-size: 1.6rem;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+  }
+}
+
+/* THE WORK Section - exactly like reference image */
+.the-work-section {
+  padding: 5rem 1rem;
+  text-align: center;
+}
+
+.the-work-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.the-work-title {
+  font-family: "Cinzel", serif;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 700;
+  color: #d4af37;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.the-work-subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 3rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.work-nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.work-item-large {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 1 / 1; /* square – adjust as needed */
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.work-item-large:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 30px rgba(212, 175, 55, 0.2);
+}
+
+.work-grid-small {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.work-item {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.work-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 30px rgba(212, 175, 55, 0.2);
+}
+
+.work-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.2rem;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.work-overlay h3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.work-item:hover .work-overlay {
+  background: rgba(212, 175, 55, 0.85);
+}
+
+.work-item:hover .work-overlay h3 {
+  color: #000;
+}
+
+.work-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #d4af37;
+}
+
+.outline-gold-link {
+  display: inline-block;
+  background: transparent;
+  border-bottom: 2px solid #d4af37;
+  color: #d4af37;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.outline-gold-link:hover {
+  background: rgba(212, 175, 55, 0.15);
+  color: #ffd700;
+  border-color: #ffd700;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.work-button-wrapper {
+  text-align: center;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .the-work-title {
+    font-size: 2rem;
+  }
+  .work-grid {
+    gap: 1rem;
+  }
+  .work-item {
+    padding: 1.5rem 1rem;
+    min-width: 130px;
+  }
+  .work-overlay h3 {
+    font-size: 1rem;
+  }
+  .work-overlay {
+    padding: 0.8rem;
+  }
+  .work-icon {
+    font-size: 2rem;
+  }
+  .work-item h3 {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .work-grid {
+    gap: 0.8rem;
+  }
+  .work-item {
+    padding: 1rem 0.8rem;
+    min-width: 110px;
+  }
 }

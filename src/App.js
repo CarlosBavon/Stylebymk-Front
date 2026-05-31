@@ -10,10 +10,12 @@ import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import CancelBooking from "./pages/CancelBooking";
 import "./App.css";
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <Navbar />
         <main className="main-content">
