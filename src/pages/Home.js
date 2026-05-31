@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import GoldButton from "../components/GoldButton";
 import "./Home.css";
-
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api/testimonials";
+import { createTestimonial } from "../api";
 
 const Home = () => {
   // ----- Testimonials State -----
