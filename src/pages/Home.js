@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import GoldButton from "../components/GoldButton";
 import "./Home.css";
-import { createTestimonial } from "../api";
 import API, { getTestimonials, createTestimonial } from "../api";
 
 const Home = () => {
@@ -78,12 +77,9 @@ const Home = () => {
     try {
       const response = await createTestimonial(newTestimonial);
       const saved = response.data;
-      // Prepend new testimonial
       setTestimonials((prev) => [saved, ...prev]);
-      // Reset form & close modal
       setNewTestimonial({ name: "", role: "", text: "", rating: 5 });
       setShowModal(false);
-      // Reset carousel to first slide
       setActiveIndex(0);
       clearInterval(carouselInterval.current);
       startCarousel();
