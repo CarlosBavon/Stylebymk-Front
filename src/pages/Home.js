@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import GoldButton from "../components/GoldButton";
 import "./Home.css";
 import { createTestimonial } from "../api";
+import API, { getTestimonials, createTestimonial } from "../api";
 
 const Home = () => {
   // ----- Testimonials State -----
@@ -13,10 +14,8 @@ const Home = () => {
   // Fetch testimonials from backend
   const fetchTestimonials = async () => {
     try {
-      const res = await fetch(API_URL);
-      if (!res.ok) throw new Error("Failed to fetch");
-      const data = await res.json();
-      setTestimonials(data);
+      const response = await getTestimonials();
+      setTestimonials(response.data);
     } catch (error) {
       console.error("Error loading testimonials:", error);
     } finally {
@@ -77,14 +76,9 @@ const Home = () => {
     }
     setSubmitting(true);
     try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newTestimonial),
-      });
-      if (!res.ok) throw new Error("Submission failed");
-      const saved = await res.json();
-      // Prepend new testimonial (newest first)
+      const response = await createTestimonial(newTestimonial);
+      const saved = response.data;
+      // Prepend new testimonial
       setTestimonials((prev) => [saved, ...prev]);
       // Reset form & close modal
       setNewTestimonial({ name: "", role: "", text: "", rating: 5 });
