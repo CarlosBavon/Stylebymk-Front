@@ -256,14 +256,14 @@ const Gallery = () => {
       category: "barrel"
     },
     {
-      id: 34,
+      id: 36,
       url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779229551/Screen_Recording_2026-05-20_011938_iotbgi.mp4",
       poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
       title: "TwistOuts",
       category: "twists"
     },
     {
-      id: 34,
+      id: 37,
       url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779229549/Screen_Recording_2026-05-20_011747_lwmit7.mp4",
       poster: "https://assets.mixkit.co/videos/preview/mixkit-bridal-hair-styling-32188-large.jpg",
       title: "TwistOuts",
