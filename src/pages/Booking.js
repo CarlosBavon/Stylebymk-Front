@@ -35,6 +35,7 @@ const Booking = () => {
 
   // Service list (unchanged)
   const services = [
+    "Cornrows",
     "Almond Twists",
     "Basket Weave Braids",
     "Boho Braids",
