@@ -5,7 +5,5 @@ const API = axios.create({ baseURL: "https://stylebymk-back.onrender.com/api" })
 export const createBooking = (data) => API.post("/bookings", data);
 export const createEnquiry = (data) => API.post("/enquiries", data);
 export const createContact = (data) => API.post("/contact", data);
-export const createTestimonial = (data) => API.post("/testimonials", data);
-export const getTestimonials = () => API.get("/testimonials");
 
 export default API;
