@@ -5,20 +5,26 @@ import myLogo from "./logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        // Scrolling down & past 50px → hide navbar
+        setIsHidden(true);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up → show navbar
+        setIsHidden(false);
       }
+      setLastScrollY(currentScrollY);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const navLinks = [
     { path: "/", label: "HOME" },
@@ -29,16 +35,14 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
+    <nav className={`navbar ${isHidden ? "hidden" : ""}`}>
       <div className="nav-container">
-        {/* Logo + Name */}
         <Link to="/" className="nav-logo">
           <img src={myLogo} alt="StylesbyMK Logo" className="profile-img" />
           <span className="logo-text">STYLESBY</span>
           <span className="logo-gold">MK</span>
         </Link>
 
-        {/* Centered navigation links */}
         <div className={`nav-menu ${isOpen ? "active" : ""}`}>
           {navLinks.map((link) => (
             <Link
@@ -51,7 +55,7 @@ const Navbar = () => {
               <span className="nav-underline"></span>
             </Link>
           ))}
-          {/* Book Now button - shown inside mobile menu */}
+          
           <Link to="/booking" className="mobile-book-btn" onClick={() => setIsOpen(false)}>
             BOOK NOW
           </Link>
