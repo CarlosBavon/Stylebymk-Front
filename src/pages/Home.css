@@ -253,7 +253,6 @@
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
   color: white;
-  margin-bottom: 3rem;
   text-align: left;
   font-weight: 600;
 }
@@ -268,14 +267,13 @@
 .work-nav {
   display: flex;
   justify-content: space-between;
-  margin: 0;
 }
 
 .work-item-large {
   position: relative;
   background-size: cover;
   background-position: center;
-  aspect-ratio: 1 / 1; /* square – adjust as needed */
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   cursor: pointer;
   transition:
@@ -292,7 +290,6 @@
 .work-grid-small {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
 }
 
 .work-item {
@@ -369,14 +366,15 @@
 }
 
 .work-button-wrapper {
-  text-align: center;
-  margin-top: 1rem;
   cursor: pointer;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .the-work-title {
+    font-size: 1.5rem;
+  }
+  .the-work-subtitle {
     font-size: 2rem;
   }
   .work-grid {
@@ -393,7 +391,7 @@
     padding: 0.8rem;
   }
   .work-icon {
-    font-size: 2rem;
+    font-size: 1rem;
   }
   .work-item h3 {
     font-size: 0.9rem;
@@ -401,6 +399,15 @@
 }
 
 @media (max-width: 550px) {
+  .the-work-title {
+    font-size: 0.9rem;
+  }
+  .the-work-subtitle {
+    font-size: 1rem;
+  }
+  .outline-gold-link {
+    font-size: 0.8rem;
+  }
   .work-grid {
     gap: 0.8rem;
   }
