@@ -8,6 +8,7 @@ import Booking from "./pages/Booking";
 import Enquiry from "./pages/Enquiry";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
+import Privacy from "./pages/Privacy";
 import CancelBooking from "./pages/CancelBooking";
 import "./App.css";
 import ScrollToTop from './components/ScrollToTop';
@@ -27,6 +28,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/cancel" element={<CancelBooking />} />
+            <Route path="/privacy" element={<Privacy />} />
           </Routes>
         </main>
         <Footer />
