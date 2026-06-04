@@ -212,18 +212,61 @@
 }
 
 @media (max-width: 480px) {
-  .stats-container {
-    gap: 1rem;
+  .stats-container{
+    width: 100%;
   }
   .stat-card {
-    padding: 1rem 1.2rem;
     min-width: 110px;
   }
   .stat-number {
-    font-size: 1.6rem;
+    font-size: 1rem;
   }
   .stat-label {
+    font-size: 0.5rem;
+  }
+  .establishment-badge {
     font-size: 0.7rem;
+  }
+  .mouse {
+    width: 15px;
+    height: 25px;
+    border: 1px solid #d4af37;
+    border-radius: 15px;
+    position: relative;
+    margin: 0 auto 5px;
+  }
+  .mouse::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 8px;
+    background: #d4af37;
+    border-radius: 1px;
+    animation: scrollWheel 2s infinite;
+  }
+  @keyframes scrollWheel {
+    0% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(10px);
+    }
+  }
+  .scroll-indicator p {
+    font-size: 0.6rem;
+    color: #d4af37;
+  }
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 0.5rem;
+    text-align: right;
+    cursor: pointer;
   }
 }
 
@@ -259,8 +302,6 @@
 
 .work-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
   margin: 2rem 0;
 }
 
@@ -269,27 +310,9 @@
   justify-content: space-between;
 }
 
-.work-item-large {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  cursor: pointer;
-  transition:
-    transform 0.3s,
-    box-shadow 0.3s;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-.work-item-large:hover {
+.work-item:hover {
   transform: translateY(-6px);
   box-shadow: 0 20px 30px rgba(212, 175, 55, 0.2);
-}
-
-.work-grid-small {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
 }
 
 .work-item {
@@ -303,11 +326,6 @@
     transform 0.3s,
     box-shadow 0.3s;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-.work-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 30px rgba(212, 175, 55, 0.2);
 }
 
 .work-overlay {

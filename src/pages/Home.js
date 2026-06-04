@@ -60,7 +60,7 @@ const Home = () => {
           </div>
           <div className="scroll-indicator" onClick={() => document.getElementById('work-section').scrollIntoView({ behavior: 'smooth' })}>
             <div className="mouse"></div>
-            <p>Scroll to explore</p>
+            <p>Tap to scroll</p>
           </div>
         </div>
         {/* THE WORK Section */}
@@ -77,17 +77,7 @@ const Home = () => {
             </div>
 
             <div className="work-grid">
-              <div className="work-item-large" style={{ backgroundImage: "url('https://res.cloudinary.com/dbaqo3rql/image/upload/v1780262894/Screenshot_2026-06-01_002531_ivrmxg.png')" }}>
-              </div>
-              <div className="work-grid-small">
-                <div className="work-item" style={{ backgroundImage: "url('https://res.cloudinary.com/dbaqo3rql/image/upload/v1780262894/Screenshot_2026-06-01_002655_pkmfem.png')" }}>
-                </div>
-                <div className="work-item" style={{ backgroundImage: "url('https://res.cloudinary.com/dbaqo3rql/image/upload/v1780262894/Screenshot_2026-06-01_002425_d5lk7s.png')" }}>
-                </div>
-                <div className="work-item" style={{ backgroundImage: "url('https://res.cloudinary.com/dbaqo3rql/image/upload/v1780262894/Screenshot_2026-06-01_002616_f4ssy9.png')" }}>
-                </div>
-                <div className="work-item" style={{ backgroundImage: "url('https://res.cloudinary.com/dbaqo3rql/image/upload/v1780262895/Screenshot_2026-06-01_002630_dzkyal.png')" }}>
-                </div>
+              <div className="work-item" style={{ backgroundImage: "url('https://res.cloudinary.com/dbaqo3rql/image/upload/v1780571109/photo-collage.png_cmyed6.png')" }}>
               </div>
             </div>
           </div>
