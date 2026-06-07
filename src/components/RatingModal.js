@@ -10,6 +10,8 @@ const RatingModal = ({ isOpen, onClose, onRatingSubmitted }) => {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState('');
 
+    const API_BASE = process.env.REACT_APP_API_URL || 'https://stylebymk-back.onrender.com/api';
+
     if (!isOpen) return null;
 
     const handleSubmit = async () => {
@@ -20,22 +22,32 @@ const RatingModal = ({ isOpen, onClose, onRatingSubmitted }) => {
         setLoading(true);
         setError('');
         try {
-            const API_BASE = process.env.REACT_APP_API_URL || 'https://stylebymk-back.onrender.com/api';
-            await axios.post(`${API_BASE}/ratings`, { stars, comment });
+            // Send stars as a number (already is) and comment as string
+            await axios.post(`${API_BASE}/ratings`, {
+                stars: Number(stars),
+                comment: comment.trim()
+            });
             setSubmitted(true);
             if (onRatingSubmitted) onRatingSubmitted();
             setTimeout(() => onClose(), 1500);
         } catch (err) {
-            setError(err.response?.data?.message || 'Failed to submit rating');
+            console.error('Rating error:', err.response?.data);
+            setError(err.response?.data?.message || 'Failed to submit rating. Please try again later.');
         } finally {
             setLoading(false);
         }
     };
 
+    const getStarFill = (star) => {
+        // Use hoverStars if set, otherwise use stars
+        const active = hoverStars || stars;
+        return star <= active ? 'filled' : '';
+    };
+
     return (
         <div className="rating-overlay" onClick={onClose}>
             <div className="rating-modal" onClick={(e) => e.stopPropagation()}>
-                <button className="rating-close" onClick={onClose}>✕</button>
+                <button className="rating-close" onClick={onClose} aria-label="Close">✕</button>
                 {!submitted ? (
                     <>
                         <h3>Rate your experience</h3>
@@ -44,10 +56,13 @@ const RatingModal = ({ isOpen, onClose, onRatingSubmitted }) => {
                             {[1, 2, 3, 4, 5].map((star) => (
                                 <span
                                     key={star}
-                                    className={`star ${star <= (hoverStars || stars) ? 'filled' : ''}`}
+                                    className={`star ${getStarFill(star)}`}
                                     onClick={() => setStars(star)}
                                     onMouseEnter={() => setHoverStars(star)}
                                     onMouseLeave={() => setHoverStars(0)}
+                                    role="button"
+                                    tabIndex={0}
+                                    aria-label={`Rate ${star} star${star !== 1 ? 's' : ''}`}
                                 >
                                     ★
                                 </span>
@@ -58,6 +73,7 @@ const RatingModal = ({ isOpen, onClose, onRatingSubmitted }) => {
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
                             rows="3"
+                            maxLength="500"
                         />
                         {error && <p className="rating-error">{error}</p>}
                         <div className="rating-buttons">
