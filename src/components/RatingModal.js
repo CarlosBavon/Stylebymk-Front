@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './RatingModal.css';
 
-const RatingModal = ({ isOpen, onClose, onRatingSubmitted, userEmail }) => {
+const RatingModal = ({ isOpen, onClose, onRatingSubmitted }) => {
     const [stars, setStars] = useState(0);
     const [hoverStars, setHoverStars] = useState(0);
     const [comment, setComment] = useState('');
@@ -21,11 +21,7 @@ const RatingModal = ({ isOpen, onClose, onRatingSubmitted, userEmail }) => {
         setError('');
         try {
             const API_BASE = process.env.REACT_APP_API_URL || 'https://stylebymk-back.onrender.com/api';
-            await axios.post(`${API_BASE}/ratings`, {
-                email: userEmail,
-                stars,
-                comment
-            });
+            await axios.post(`${API_BASE}/ratings`, { stars, comment });
             setSubmitted(true);
             if (onRatingSubmitted) onRatingSubmitted();
             setTimeout(() => onClose(), 1500);

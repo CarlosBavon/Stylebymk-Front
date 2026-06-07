@@ -10,14 +10,11 @@ const Home = () => {
   const [averageRating, setAverageRating] = useState(4.9);
   const [ratingCount, setRatingCount] = useState(0);
   const [showRatingModal, setShowRatingModal] = useState(false);
-  const [userEmail, setUserEmail] = useState('');
 
   const API_BASE = process.env.REACT_APP_API_URL || 'https://stylebymk-back.onrender.com/api';
 
   useEffect(() => {
     fetchAverageRating();
-    const storedEmail = localStorage.getItem('userEmail');
-    if (storedEmail) setUserEmail(storedEmail);
   }, []);
 
   const fetchAverageRating = async () => {
@@ -33,13 +30,6 @@ const Home = () => {
   };
 
   const handleRatingClick = () => {
-    let email = userEmail;
-    if (!email) {
-      email = prompt('Please enter your email address to rate us:');
-      if (!email) return;
-      setUserEmail(email);
-      localStorage.setItem('userEmail', email);
-    }
     setShowRatingModal(true);
   };
 
@@ -124,7 +114,6 @@ const Home = () => {
         isOpen={showRatingModal}
         onClose={() => setShowRatingModal(false)}
         onRatingSubmitted={fetchAverageRating}
-        userEmail={userEmail}
       />
     </>
   );
