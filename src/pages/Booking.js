@@ -83,7 +83,8 @@ const Booking = () => {
     "Tribal Braids",
     "Two-Strand Twists",
     "Waterfall Braids",
-    "Zigzag Cornrows"
+    "Zigzag Cornrows",
+    "OTHER..."
   ];
 
   // Fetch booked slots when date changes (using local date string)
