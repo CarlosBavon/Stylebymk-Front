@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import GoldButton from "../components/GoldButton";
 import RatingModal from "../components/RatingModal";
@@ -13,11 +13,7 @@ const Home = () => {
 
   const API_BASE = process.env.REACT_APP_API_URL || 'https://stylebymk-back.onrender.com/api';
 
-  useEffect(() => {
-    fetchAverageRating();
-  }, []);
-
-  const fetchAverageRating = async () => {
+  const fetchAverageRating = useCallback(async () => {
     try {
       const res = await axios.get(`${API_BASE}/ratings/average`);
       if (res.data.success) {
@@ -27,7 +23,11 @@ const Home = () => {
     } catch (err) {
       console.error('Failed to fetch ratings:', err);
     }
-  };
+  }, [API_BASE]);
+
+  useEffect(() => {
+    fetchAverageRating();
+  }, []);
 
   const handleRatingClick = () => {
     setShowRatingModal(true);
