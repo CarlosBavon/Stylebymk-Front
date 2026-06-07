@@ -1,11 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import GoldButton from "../components/GoldButton";
+import RatingModal from "../components/RatingModal";
 import "./Home.css";
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
-
 const Home = () => {
+  const [averageRating, setAverageRating] = useState(4.9);
+  const [ratingCount, setRatingCount] = useState(0);
+  const [showRatingModal, setShowRatingModal] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+
+  const API_BASE = process.env.REACT_APP_API_URL || 'https://stylebymk-back.onrender.com/api';
+
+  useEffect(() => {
+    fetchAverageRating();
+    const storedEmail = localStorage.getItem('userEmail');
+    if (storedEmail) setUserEmail(storedEmail);
+  }, []);
+
+  const fetchAverageRating = async () => {
+    try {
+      const res = await axios.get(`${API_BASE}/ratings/average`);
+      if (res.data.success) {
+        setAverageRating(res.data.average);
+        setRatingCount(res.data.count);
+      }
+    } catch (err) {
+      console.error('Failed to fetch ratings:', err);
+    }
+  };
+
+  const handleRatingClick = () => {
+    let email = userEmail;
+    if (!email) {
+      email = prompt('Please enter your email address to rate us:');
+      if (!email) return;
+      setUserEmail(email);
+      localStorage.setItem('userEmail', email);
+    }
+    setShowRatingModal(true);
+  };
+
   return (
     <>
       <Helmet>
@@ -31,17 +68,17 @@ const Home = () => {
           </div>
           <h1 className="main-title">
             <span>STYLESBY</span>
-            <br></br><span className="gold-text-glow">MK</span>
+            <br /><span className="gold-text-glow">MK</span>
           </h1>
           <p className="subtitle">Experience The Art of Hair Design</p>
           <div className="cta-buttons">
             <GoldButton to="/booking">
               BOOK A SESSION{" "}
-              <i class="fa-solid fa-calendar" style={{ color: "black" }}></i>
+              <i className="fa-solid fa-calendar" style={{ color: "black" }}></i>
             </GoldButton>
             <GoldButton to="/enquiry" variant="outline">
               MAKE AN ENQUIRY{" "}
-              <i class="fa-solid fa-note-sticky" style={{ color: "gold" }}></i>
+              <i className="fa-solid fa-note-sticky" style={{ color: "gold" }}></i>
             </GoldButton>
           </div>
           <div className="stats-container">
@@ -49,9 +86,9 @@ const Home = () => {
               <div className="stat-number">500+</div>
               <div className="stat-label">CLIENTS SERVED</div>
             </div>
-            <div className="stat-card">
-              <div className="stat-number">4.9★</div>
-              <div className="stat-label">RATING</div>
+            <div className="stat-card" onClick={handleRatingClick} style={{ cursor: 'pointer' }}>
+              <div className="stat-number">{averageRating}★</div>
+              <div className="stat-label">RATING ({ratingCount})</div>
             </div>
             <div className="stat-card">
               <div className="stat-number">5+</div>
@@ -75,7 +112,6 @@ const Home = () => {
                 </Link>
               </div>
             </div>
-
             <div className="work-grid">
               <div className="work-item" style={{ backgroundImage: "url('https://res.cloudinary.com/dbaqo3rql/image/upload/v1780571109/photo-collage.png_cmyed6.png')" }}>
               </div>
@@ -83,6 +119,13 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      <RatingModal
+        isOpen={showRatingModal}
+        onClose={() => setShowRatingModal(false)}
+        onRatingSubmitted={fetchAverageRating}
+        userEmail={userEmail}
+      />
     </>
   );
 };
