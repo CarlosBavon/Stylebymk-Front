@@ -12,28 +12,33 @@ import Privacy from "./pages/Privacy";
 import CancelBooking from "./pages/CancelBooking";
 import "./App.css";
 import ScrollToTop from './components/ScrollToTop';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="App">
-        <Navbar />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/booking" element={<Booking />} />
-            <Route path="/enquiry" element={<Enquiry />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/cancel" element={<CancelBooking />} />
-            <Route path="/privacy" element={<Privacy />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <>
+      <Analytics />
+      <Router>
+        <ScrollToTop />
+        <div className="App">
+          <Navbar />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/enquiry" element={<Enquiry />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/cancel" element={<CancelBooking />} />
+              <Route path="/privacy" element={<Privacy />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </>
+
   );
 }
 
