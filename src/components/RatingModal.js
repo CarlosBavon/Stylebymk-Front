@@ -21,7 +21,7 @@ const RatingModal = ({ isOpen, onClose, onRatingSubmitted }) => {
         setError('');
         try {
             const API_BASE = process.env.REACT_APP_API_URL || 'https://stylebymk-back.onrender.com/api';
-            await axios.post(`${API_BASE}/ratings`, { stars, comment });
+            await axios.post(`${API_BASE}/ratings`, { stars });
             setSubmitted(true);
             if (onRatingSubmitted) onRatingSubmitted();
             setTimeout(() => onClose(), 1500);
