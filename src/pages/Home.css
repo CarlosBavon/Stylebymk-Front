@@ -18,6 +18,7 @@
   width: 100%;
   height: 100vh;
   object-fit: cover;
+  object-position: center;
 }
 
 .video-overlay {
@@ -90,6 +91,12 @@
   justify-content: center;
 }
 
+.rate-here {
+  color: #d4af37;
+  font-size: 0.8rem;
+  margin-bottom: -10px;
+}
+
 .scroll-indicator {
   position: absolute;
   bottom: 5rem;
@@ -123,11 +130,11 @@
 @keyframes scrollWheel {
   0% {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(20px);
   }
   100% {
     opacity: 0;
-    transform: translateX(-50%) translateY(20px);
+    transform: translateX(-50%) translateY(0);
   }
 }
 

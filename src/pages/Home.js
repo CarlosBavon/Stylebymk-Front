@@ -73,11 +73,11 @@ const Home = () => {
           </div>
           <div className="stats-container">
             <div className="stat-card">
-              <div className="stat-number">500+</div>
+              <div className="stat-number">1,000+</div>
               <div className="stat-label">CLIENTS SERVED</div>
             </div>
             <div className="stat-card" onClick={handleRatingClick} style={{ cursor: 'pointer' }}>
-              <p>Tap to Rate</p>
+              <p className="rate-here">Rate Here &#8595;</p>
               <div className="stat-number">{averageRating}★</div>
               <div className="stat-label">RATING ({ratingCount})</div>
             </div>
