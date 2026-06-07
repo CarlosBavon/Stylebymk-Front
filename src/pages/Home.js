@@ -77,6 +77,7 @@ const Home = () => {
               <div className="stat-label">CLIENTS SERVED</div>
             </div>
             <div className="stat-card" onClick={handleRatingClick} style={{ cursor: 'pointer' }}>
+              <p>Tap to Rate</p>
               <div className="stat-number">{averageRating}★</div>
               <div className="stat-label">RATING ({ratingCount})</div>
             </div>
