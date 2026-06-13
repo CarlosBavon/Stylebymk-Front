@@ -12,8 +12,7 @@ const routes = [
     '/cancel',
 ];
 
-// Your website URL (replace with your actual domain)
-const BASE_URL = 'https://stylebymk.vercel.app'; // or your custom domain
+const BASE_URL = 'https://stylebymk.vercel.app';
 
 const generateSitemap = () => {
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
