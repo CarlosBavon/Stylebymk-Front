@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import GoldButton from "../components/GoldButton";
 import { createBooking } from "../api";
-import axios from "axios";
+import API from "../api"; // import the configured axios instance
 import "./Booking.css";
 import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet-async';
@@ -34,7 +34,7 @@ const Booking = () => {
   const [message, setMessage] = useState("");
   const [fetchingSlots, setFetchingSlots] = useState(false);
 
-  // Service list (unchanged)
+  // Service list
   const services = [
     "Cornrows",
     "Twists",
@@ -42,16 +42,18 @@ const Booking = () => {
     "Locs (Dreadlocks)",
   ];
 
-  // Fetch booked slots when date changes (using local date string)
+  // Fetch booked slots when date OR service changes
   useEffect(() => {
     const fetchBookedSlots = async () => {
       if (!formData.date) return;
       setFetchingSlots(true);
       try {
         const dateStr = getLocalDateString(formData.date);
-        const response = await axios.get(
-          `https://stylebymk-back.onrender.com/api/bookings/slots/${dateStr}`,
-        );
+        // Pass the selected service to the backend
+        const serviceParam = formData.service
+          ? `?service=${encodeURIComponent(formData.service)}`
+          : '';
+        const response = await API.get(`/bookings/slots/${dateStr}${serviceParam}`);
         setAvailableTimes(response.data.availableTimes || []);
         if (
           formData.time &&
@@ -67,8 +69,7 @@ const Booking = () => {
       }
     };
     fetchBookedSlots();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData.date]);
+  }, [formData.date, formData.service]); // 👈 re‑fetch when date or service changes
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -90,7 +91,6 @@ const Booking = () => {
     }
     setLoading(true);
     try {
-      // Prepare payload with date as local string (YYYY-MM-DD)
       const payload = {
         ...formData,
         date: getLocalDateString(formData.date),
@@ -124,7 +124,6 @@ const Booking = () => {
     }
   };
 
-  // Minimum selectable date = tomorrow
   const minSelectableDate = new Date();
   minSelectableDate.setDate(minSelectableDate.getDate() + 1);
 
