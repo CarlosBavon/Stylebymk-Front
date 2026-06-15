@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import GoldButton from "../components/GoldButton";
 import { createBooking } from "../api";
-import API from "../api"; // import the configured axios instance
+import API from "../api";
 import "./Booking.css";
 import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet-async';
@@ -37,9 +37,9 @@ const Booking = () => {
   // Service list
   const services = [
     "Cornrows",
-    "Twists",
+    "Natural twists",
     "Barrel Twists",
-    "Locs (Dreadlocks)",
+    "Artificial locs!",
   ];
 
   // Fetch booked slots when date OR service changes
@@ -69,7 +69,7 @@ const Booking = () => {
       }
     };
     fetchBookedSlots();
-  }, [formData.date, formData.service]); // 👈 re‑fetch when date or service changes
+  }, [formData.date, formData.service]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
