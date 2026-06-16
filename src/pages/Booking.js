@@ -189,6 +189,22 @@ const Booking = () => {
             </div>
 
             <div className="form-group">
+              <label>Select Hairstyle</label>
+              <select
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+                required
+              >
+                {services.map((service) => (
+                  <option key={service} value={service}>
+                    {service}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
               <label>Select Time</label>
               {fetchingSlots ? (
                 <p style={{ color: "#D4AF37" }}>Loading available times...</p>
@@ -214,22 +230,6 @@ const Booking = () => {
                   )}
                 </div>
               )}
-            </div>
-
-            <div className="form-group">
-              <label>Select Hairstyle</label>
-              <select
-                name="service"
-                value={formData.service}
-                onChange={handleChange}
-                required
-              >
-                {services.map((service) => (
-                  <option key={service} value={service}>
-                    {service}
-                  </option>
-                ))}
-              </select>
             </div>
 
             <GoldButton
