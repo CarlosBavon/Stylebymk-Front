@@ -35,6 +35,20 @@ const Privacy = () => {
                         <li>To gather analysis or valuable information so that we can improve our Service.</li>
                         <li>To send you marketing and promotional communications (only if you have opted in).</li>
                     </ul>
+                    <h2>Disclosure of Google User Data</h2>
+                    <p>Our booking system integrates with Google Calendar to manage appointments. When you make a booking through our website, we access and use your basic profile information (name and email address) and the appointment details you provide to perform the following actions on your behalf:</p>
+                    <ul>
+                        <li><strong>Create Calendar Events:</strong> We automatically create an event on our salon's Google Calendar with your name, selected service, appointment date, and time.</li>
+                        <li><strong>Send Calendar Invitations:</strong> We may send you a calendar invitation via Google Calendar to help you remember your appointment.</li>
+                    </ul>
+                    <p><strong>With Whom We Share Your Google User Data:</strong></p>
+                    <ul>
+                        <li><strong>Our Salon Team:</strong> Your booking details are visible to our salon staff who manage the calendar and prepare for your appointment.</li>
+                        <li><strong>Technical Service Providers:</strong> We use [<strong>MongoDB Atlas</strong>] to store your booking data and [<strong>Render</strong>] to host our backend server. These providers may process your data on our behalf, but they are not permitted to use it for their own purposes.</li>
+                        <li><strong>Legal and Compliance:</strong> We may disclose your information if required by law or to protect the rights, property, or safety of our business, our clients, or others.</li>
+                    </ul>
+                    <p><strong>Limited Use Compliance:</strong></p>
+                    <p>Our use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Google API Services User Data Policy</a>, including the <strong>Limited Use</strong> requirements. We do not sell your Google user data or use it for advertising or marketing purposes beyond the scope of booking management[reference:2].</p>
 
                     <h2>3. Storage & Security</h2>
                     <p>We take the security of your data seriously. Your personal data (name, email, phone) is stored securely on our database hosted by <strong>MongoDB Atlas</strong>. While we strive to use commercially acceptable means to protect your Personal Data, remember that no method of transmission over the Internet, or method of electronic storage, is 100% secure. We also use <strong>Google Calendar</strong> solely for the purpose of scheduling your appointments and sending you calendar invites.</p>
