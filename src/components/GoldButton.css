@@ -12,7 +12,7 @@
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 270px;
+  width: 100%;
 }
 
 .gold-button:hover {
