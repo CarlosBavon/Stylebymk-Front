@@ -6,12 +6,15 @@ import myLogo from "./logo.png";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 20);
+
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
         // Scrolling down & past 50px → hide navbar
         setIsHidden(true);
@@ -22,9 +25,27 @@ const Navbar = () => {
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  // Close the mobile drawer on route change (covers back/forward nav too)
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  // Close on Escape, and lock body scroll while the drawer is open
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", handleKey);
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      window.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   const navLinks = [
     { path: "/", label: "HOME" },
@@ -35,7 +56,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`navbar ${isHidden ? "hidden" : ""}`}>
+    <nav className={`navbar ${isHidden ? "hidden" : ""} ${isScrolled ? "scrolled" : ""}`}>
       <div className="nav-container">
         <Link to="/" className="nav-logo">
           <img src={myLogo} alt="StylesbyMK Logo" className="profile-img" />
@@ -52,10 +73,9 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
             >
               {link.label}
-              <span className="nav-underline"></span>
             </Link>
           ))}
-          
+
           <Link to="/booking" className="mobile-book-btn" onClick={() => setIsOpen(false)}>
             BOOK NOW
           </Link>
@@ -67,11 +87,17 @@ const Navbar = () => {
         </Link>
 
         {/* Hamburger toggle */}
-        <div className="nav-toggle" onClick={() => setIsOpen(!isOpen)}>
+        <button
+          type="button"
+          className="nav-toggle"
+          onClick={() => setIsOpen((prev) => !prev)}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isOpen}
+        >
           <span className={`bar ${isOpen ? "active" : ""}`}></span>
           <span className={`bar ${isOpen ? "active" : ""}`}></span>
           <span className={`bar ${isOpen ? "active" : ""}`}></span>
-        </div>
+        </button>
       </div>
     </nav>
   );
