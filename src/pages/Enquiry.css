@@ -1,49 +1,192 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap");
+
 .enquiry-page {
+  --ink: #0b0b0c;
+  --panel: #151412;
+  --panel-2: #1c1a17;
+  --gold: #d4af37;
+  --gold-light: #f0dfa0;
+  --gold-deep: #9c7a22;
+  --ivory: #f5f1e8;
+  --muted: #a89f8f;
+  --rule: rgba(212, 175, 55, 0.25);
+  --rust: #c0524a;
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "Jost", "Helvetica Neue", sans-serif;
+
   min-height: 100vh;
   padding-top: 100px;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  background:
+    radial-gradient(ellipse at top, rgba(212, 175, 55, 0.07), transparent 60%),
+    linear-gradient(180deg, var(--ink) 0%, #121110 100%);
+  color: var(--ivory);
+  font-family: var(--sans);
 }
 
-.enquiry-header {
-  text-align: center;
-  padding: 2rem;
+.enquiry-page .gold-text {
+  background: linear-gradient(
+    120deg,
+    var(--gold-deep),
+    var(--gold-light) 50%,
+    var(--gold)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.enquiry-page .italic {
+  font-style: italic;
 }
 
-.enquiry-header h1 {
-  font-size: 2.5rem;
+.enquiry-page .eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
   margin-bottom: 1rem;
 }
 
-.enquiry-container {
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 20px;
-  animation: fadeInUp 0.6s ease-out;
+/* ---------- Hero ---------- */
+.enquiry-hero {
+  text-align: center;
+  padding: clamp(3rem, 8vw, 5rem) 2rem 3rem;
+}
+.enquiry-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  margin: 0 0 1.1rem;
+}
+.hero-subtitle {
+  max-width: 460px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.hero-divider {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.hero-divider span {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(var(--gold), transparent);
 }
 
+/* ---------- Container ---------- */
+.enquiry-container {
+  position: relative;
+  max-width: 640px;
+  margin: 1rem auto 6rem;
+  padding: 3rem clamp(1.5rem, 5vw, 3rem);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: linear-gradient(160deg, var(--panel), var(--panel-2));
+}
+.enquiry-container::before,
+.enquiry-container::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--gold);
+}
+.enquiry-container::before {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+.enquiry-container::after {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+/* ---------- Form ---------- */
 .enquiry-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
-
-textarea {
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 8px;
-  color: white;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.form-group label {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.form-group input,
+.form-group textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ivory);
+  font-family: var(--sans);
   font-size: 1rem;
-  resize: vertical;
-  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  padding: 0.6rem 0.1rem;
+  transition: border-color 0.3s ease;
+  resize: none;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--muted);
 }
 
-textarea:focus {
-  outline: none;
-  border-color: #D4AF37;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+.enquiry-form button {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.form-message {
+  padding: 0.9rem 1.1rem;
+  border-radius: 2px;
+  font-size: 0.88rem;
+  border-left: 2px solid;
+}
+.form-message.success {
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--gold-light);
+}
+.form-message.error {
+  border-color: var(--rust);
+  background: rgba(192, 82, 74, 0.1);
+  color: #e2a29d;
+}
+
+/* ---------- Motion ---------- */
+.fade-up {
+  animation: fadeUp 0.8s ease both;
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    animation: none !important;
+  }
 }

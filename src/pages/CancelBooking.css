@@ -1,23 +1,190 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap");
+
 .cancel-page {
+  --ink: #0b0b0c;
+  --panel: #151412;
+  --panel-2: #1c1a17;
+  --gold: #d4af37;
+  --gold-light: #f0dfa0;
+  --gold-deep: #9c7a22;
+  --ivory: #f5f1e8;
+  --muted: #a89f8f;
+  --rule: rgba(212, 175, 55, 0.25);
+  --rust: #c0524a;
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "Jost", "Helvetica Neue", sans-serif;
+
   min-height: 100vh;
   padding-top: 120px;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  padding-bottom: 4rem;
+  background:
+    radial-gradient(ellipse at top, rgba(212, 175, 55, 0.07), transparent 60%),
+    linear-gradient(180deg, var(--ink) 0%, #121110 100%);
+  color: var(--ivory);
+  font-family: var(--sans);
   display: flex;
   justify-content: center;
+  align-items: flex-start;
 }
+
+.cancel-page .gold-text {
+  background: linear-gradient(
+    120deg,
+    var(--gold-deep),
+    var(--gold-light) 50%,
+    var(--gold)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.cancel-page .italic {
+  font-style: italic;
+}
+.cancel-page .eyebrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+/* ---------- Card ---------- */
 .cancel-container {
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(212,175,55,0.3);
-  border-radius: 20px;
-  padding: 2rem;
-  max-width: 500px;
+  position: relative;
+  max-width: 460px;
   width: 90%;
+  padding: 3rem clamp(1.5rem, 5vw, 2.5rem);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: linear-gradient(160deg, var(--panel), var(--panel-2));
   text-align: center;
 }
-.cancel-container form {
+.cancel-container::before,
+.cancel-container::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--gold);
+}
+.cancel-container::before {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+.cancel-container::after {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+.cancel-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4.5vw, 2.6rem);
+  line-height: 1.15;
+  margin: 0 0 0.9rem;
+}
+.cancel-subtitle {
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 360px;
+  margin: 0 auto;
+}
+.cancel-note {
+  color: var(--rust);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 0.7rem;
+}
+
+/* ---------- Form ---------- */
+.cancel-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  gap: 1.75rem;
+  margin-top: 2.25rem;
+  text-align: left;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.form-group label {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.form-group input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ivory);
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 0.6rem 0.1rem;
+  transition: border-color 0.3s ease;
+}
+.form-group input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.cancel-form button {
+  align-self: center;
+  margin-top: 0.25rem;
+}
+
+.form-message {
+  padding: 0.9rem 1.1rem;
+  border-radius: 2px;
+  font-size: 0.85rem;
+  border-left: 2px solid;
+  text-align: left;
+}
+.form-message.success {
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--gold-light);
+}
+.form-message.error {
+  border-color: var(--rust);
+  background: rgba(192, 82, 74, 0.1);
+  color: #e2a29d;
+}
+
+/* ---------- Motion ---------- */
+.fade-up {
+  animation: fadeUp 0.8s ease both;
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .cancel-container {
+    padding: 2.25rem 1.5rem;
+  }
 }

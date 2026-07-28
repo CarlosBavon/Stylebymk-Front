@@ -52,13 +52,19 @@ const CancelBooking = () => {
         <meta name="description" content="Experience the art of hair design at StylesbyMK. Book your session for cornrows, twists, barrel twists, locs and more. Premium quality, gold‑standard service." />
         <link rel="canonical" href="https://stylesbymk.vercel.app/" />
       </Helmet>
+
       <div className="cancel-page">
-        <div className="cancel-container">
-          <h1>
-            Cancel <span className="gold-text">Booking</span>
+        <div className="cancel-container fade-up">
+          <span className="eyebrow">Booking</span>
+          <h1 className="cancel-title">
+            Cancel <span className="gold-text italic">Booking</span>
           </h1>
-          <p>Enter your booking code and email address</p>
-          <form onSubmit={handleCancel}>
+          <p className="cancel-subtitle">
+            Enter your booking code and email to cancel your appointment.
+          </p>
+          <p className="cancel-note">This action cannot be undone.</p>
+
+          <form onSubmit={handleCancel} className="cancel-form">
             <div className="form-group">
               <label>Booking Code</label>
               <input
@@ -83,7 +89,7 @@ const CancelBooking = () => {
               {loading ? "Cancelling..." : "Cancel Booking"}
             </GoldButton>
             {message && (
-              <div className={`message ${message.type}`}>{message.text}</div>
+              <div className={`form-message ${message.type}`}>{message.text}</div>
             )}
           </form>
         </div>

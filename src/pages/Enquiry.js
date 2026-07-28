@@ -45,15 +45,20 @@ const Enquiry = () => {
         <meta name="description" content="Experience the art of hair design at StylesbyMK. Book your session for cornrows, twists, barrel twists, locs and more. Premium quality, gold‑standard service." />
         <link rel="canonical" href="https://stylesbymk.vercel.app/" />
       </Helmet>
-      <div className="enquiry-page">
-        <div className="enquiry-header">
-          <h1>
-            Send an <span className="gold-text">Enquiry</span>
-          </h1>
-          <p>Have questions? We're here to help</p>
-        </div>
 
-        <div className="enquiry-container">
+      <div className="enquiry-page">
+        <section className="enquiry-hero">
+          <span className="eyebrow fade-up">Reach Out</span>
+          <h1 className="enquiry-title fade-up">
+            Send an <span className="gold-text italic">Enquiry</span>
+          </h1>
+          <p className="hero-subtitle fade-up">
+            Have a question before you book? Tell us what's on your mind.
+          </p>
+          <div className="hero-divider fade-up"><span /></div>
+        </section>
+
+        <div className="enquiry-container fade-up">
           <form onSubmit={handleSubmit} className="enquiry-form">
             <div className="form-group">
               <label>Your Name</label>
@@ -89,11 +94,11 @@ const Enquiry = () => {
             </div>
 
             <GoldButton type="submit" disabled={loading}>
-              {loading ? "Sending..." : "Send Enquiry 💫"}
+              {loading ? "Sending..." : "Send Enquiry"}
             </GoldButton>
 
             {message && (
-              <div className={`message ${message.type}`}>{message.text}</div>
+              <div className={`form-message ${message.type}`}>{message.text}</div>
             )}
           </form>
         </div>

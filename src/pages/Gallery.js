@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import "./Gallery.css";
 import { Helmet } from 'react-helmet-async';
 
-// Sample video collection (replace with your own MP4/YouTube URLs)
 const allVideos = [
   { id: 1, url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779226897/Screen_Recording_2026-05-19_185532_lywhoy.mp4", title: "Braiding Artistry", category: "cornrows" },
   { id: 2, url: "https://res.cloudinary.com/dbaqo3rql/video/upload/v1779229561/Screen_Recording_2026-05-20_012453_kssjwv.mp4", title: "Twist Sculpting", category: "barrel" },
@@ -52,7 +51,7 @@ const Gallery = () => {
     { key: "all", label: "All Work" },
     { key: "cornrows", label: "Cornrows & Braids" },
     { key: "twists", label: "TwistOuts" },
-    { key: "barrel", label: "Barrel twists" }
+    { key: "barrel", label: "Barrel Twists" }
   ];
 
   // Category filter logic (same as before)
@@ -63,8 +62,6 @@ const Gallery = () => {
       setFilteredVideos(allVideos.filter(v => v.category === activeCategory));
     }
   }, [activeCategory]);
-
-
 
   const currentIndex = filteredVideos.findIndex(v => v.id === selectedVideo?.id);
   const nextVideo = useCallback(() => {
@@ -95,23 +92,27 @@ const Gallery = () => {
         <meta name="description" content="Experience the art of hair design at StylesbyMK. Book your session for cornrows, twists, barrel twists, locs and more. Premium quality, gold‑standard service." />
         <link rel="canonical" href="https://stylesbymk.vercel.app/" />
       </Helmet>
-      <div className="gallery-page">
-        <div className="gallery-header">
-          <h1>
-            The <span className="gold-text">Video Gallery</span>
-          </h1>
-          <p className="gallery-subtitle">Watch our artistry in motion – every style tells a story</p>
-        </div>
 
-        <div className="gallery-filters">
+      <div className="gallery-page">
+        <section className="gallery-hero">
+          <span className="eyebrow fade-up">In Motion</span>
+          <h1 className="gallery-title fade-up">
+            The <span className="gold-text italic">Gallery</span>
+          </h1>
+          <p className="hero-subtitle fade-up">
+            Watch our artistry in motion — every style tells a story.
+          </p>
+          <div className="hero-divider fade-up"><span /></div>
+        </section>
+
+        <div className="gallery-filters fade-up">
           {categories.map(cat => (
             <button
               key={cat.key}
               className={`filter-btn ${activeCategory === cat.key ? "active" : ""}`}
               onClick={() => setActiveCategory(cat.key)}
             >
-              <span className="filter-icon">{cat.icon}</span>
-              <span className="filter-label">{cat.label}</span>
+              {cat.label}
             </button>
           ))}
         </div>
@@ -123,7 +124,6 @@ const Gallery = () => {
               className="gallery-item"
               onClick={() => setSelectedVideo(video)}
             >
-              {/* Video thumbnail (muted, loop, shows first frame) */}
               <video
                 src={video.url}
                 muted
@@ -145,8 +145,8 @@ const Gallery = () => {
         {selectedVideo && (
           <div className="lightbox" onClick={() => setSelectedVideo(null)}>
             <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-              <button className="lightbox-close" onClick={() => setSelectedVideo(null)}>✕</button>
-              <button className="lightbox-prev" onClick={prevVideo}>‹</button>
+              <button className="lightbox-close" onClick={() => setSelectedVideo(null)} aria-label="Close">✕</button>
+              <button className="lightbox-prev" onClick={prevVideo} aria-label="Previous video">‹</button>
               <div className="lightbox-video-container">
                 <video
                   src={selectedVideo.url}
@@ -162,7 +162,7 @@ const Gallery = () => {
                   </p>
                 </div>
               </div>
-              <button className="lightbox-next" onClick={nextVideo}>›</button>
+              <button className="lightbox-next" onClick={nextVideo} aria-label="Next video">›</button>
               <div className="lightbox-counter">
                 {currentIndex + 1} / {filteredVideos.length}
               </div>
