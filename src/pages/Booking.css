@@ -225,6 +225,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  border-bottom: 1px solid #d4af37;
+  border-radius: 8px;
 }
 
 .form-group label {

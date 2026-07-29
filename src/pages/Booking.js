@@ -64,7 +64,7 @@ const Booking = () => {
       }
     };
     fetchBookedSlots();
-  }, [formData.date, formData.service]);
+  }, [formData.date, formData.service, formData.time]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
