@@ -10,6 +10,7 @@ import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import Privacy from "./pages/Privacy";
 import CancelBooking from "./pages/CancelBooking";
+import Catalogue from "./pages/Catalogue";
 import "./App.css";
 import ScrollToTop from './components/ScrollToTop';
 import { Analytics } from "@vercel/analytics/react"
@@ -34,6 +35,7 @@ function App() {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/cancel" element={<CancelBooking />} />
               <Route path="/privacy" element={<Privacy />} />
+              <Route path="/catalogue" element={<Catalogue />} />
             </Routes>
           </main>
           <Footer />

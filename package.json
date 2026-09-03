@@ -10,6 +10,8 @@
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "axios": "^1.15.2",
+    "cloudinary": "^2.10.0",
+    "dotenv": "^17.4.2",
     "morgan": "^1.10.1",
     "react": "^19.2.5",
     "react-datepicker": "^9.1.0",
